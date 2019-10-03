@@ -40,15 +40,14 @@
 				}
 			}
 			
-	        print('<td><form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="type" line="'.$i.'"/></form></td>');
+	        print('<td><form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$i.'"/></form></td>');
 			print("</tr>");
 			$lastDate = $tabValue[0];
         }
 
 		print("</table>");
 ?>
-	
-	 
-	
+
+
   </body>
 </html>
