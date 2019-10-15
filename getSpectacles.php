@@ -8,16 +8,50 @@
   </head>
   <body>
 
+<!-- ce qei ressemble à l'entête plus le petit panier à droite-->
 
-<?php
+<div class="bandeau">
+	<div class="petitPanier">
+		<table>
+			Billets en vente exclusivement sur les lieux du festival: Monétay, Monteignet, Veauce  du 2 au 6 août dès 11h00 et le 6 août à Moulins de 19h00 à 20h00.
+									Attention! à Moulins le début du spectacle à 20h00.
+	</table>
+	</div>
+										<h1> Festival Théâtres de Bourbon </h1>
+</div>
 
-<<<<<<< HEAD
-if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
+<!-- le menu à gauche -->
+	<div class="menu">
+			<ul>
+					<h3> le site</h3>
+					<li> qui sommes nous ?</li>
+					<li><a href="getSpectacles.php">jour par jour</a></li>
+					<li> lieu par lieu</li>
+					<li> spectacles </li>
+					<li>tarifs</li>			
+			</ul> 
+			<ul>
+
+					<li>le festival </li>
+					<li> carte blanche </li>
+					<li> l'association </li>
+					<li> devinir membre </li>
+					<li> faire un don</li>
+					<li> nous contacter</li>
+		  </ul>
+  </div>
+<!-- fin index.html-->
+
+<main>
+	<div class="decalage">
+		<?php
+
+		if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
-					
-				foreach($data as $value) {
+						
+				foreach($data as $i => $value) {
 					$replaced = preg_replace_callback(
 						'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 						function ($match){
@@ -31,50 +65,26 @@ if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 					$fields = preg_split("[,]", $replaced);
 					if($jour != $fields[0]){
 						$jour = $fields[0];
-						echo "<h2> " . $jour . "</h2>";
+						echo "<h2> " . $jour . "</h2>\n";
 					}
-					echo "<div class= \"Lieu\">\n";
-					echo $fields[2] . ", par " . $fields[5] . " à " . $fields[4] . "\n</div>\n";
-					
-				
-=======
-            // affichage des message de bonjour
-            $cont = file_get_contents("ResultatsFestival.csv");
-
-            // on coupe le contenu du fichier avec le caractere de saut de ligne
-
-            $spectacles = explode("\n", $cont);
-
-            //on affiche ligne apres ligne telle quelle
-
-		
-      	$lastDate = explode(",", $spectacles[0])[0];
-        foreach ($spectacles as $i => $v){
-
-			print("<tr>");
-			$tabValue = explode(",", $v);
-		
-			if($lastDate != $tabValue){
-				print("<h2>".$value."</h2>");
-			}
-			}else{
-			switch($id){
-						case 2:
-							print("<horaire>".$value."</horaire>");
-						case 3:
-							print("<lieu>".$value."</lieu>");
-					}
-					//if($id<6)print("<td>".$value."</td>\n");
-				}
->>>>>>> 2bedeb68d7a117d8f821406247fc8e837a249e8c
-			}
 			
-		}
-		
-		fclose($handle);
-	}
+					$horaire = $fields[1];
+					$titre = $fields[2];
+					$lieu = $fields[3];
+					$village = $fields[4];
+					$compagnie = $fields[5];
+			
+			
+					print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, par <troupe>" . $compagnie . "</troupe>");
+					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$i.'"/></form></p>');
+					
+				}
+			}
+		}			
+
+
 ?>
-
-
-  </body>
+	</div>
+</main>
+</body>
 </html>
