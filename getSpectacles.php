@@ -10,6 +10,7 @@
 
 
 <?php
+
             // affichage des message de bonjour
             $cont = file_get_contents("ResultatsFestival.csv");
 
@@ -24,7 +25,6 @@
 
 			print("<tr>");
 			$tabValue = explode(",", $v);
-
 
 			foreach ($tabValue as $id => $value){
 				if($id==0){
