@@ -49,9 +49,10 @@
 		if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
+				$cptLine = 1;
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 						
-				foreach($data as $i => $value) {
+				foreach($data as $value) {
 					$replaced = preg_replace_callback(
 						'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 						function ($match){
@@ -75,9 +76,9 @@
 					$compagnie = $fields[5];
 			
 			
-					print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, par <troupe>" . $compagnie . "</troupe>");
-					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$i.'"/></form></p>');
-					
+					print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>\n");
+					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></p>');
+					$cptLine++;
 				}
 			}
 		}			

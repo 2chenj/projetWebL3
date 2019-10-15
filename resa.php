@@ -57,15 +57,23 @@ if (isset($_GET["line"])){
 			print("<h2>".$titre."</h2>");
 			print("<p>la compagnie ".$compagnie." vous présente la pièce ".$titre." le ".$date." au village de ".$village." à ".$heure." dans le ".$lieu.".</p>");
 			print('<figure id="spectacle">');
-			print('<img  src="images/'.$affiche.'" width=100% height=100%></img>');
+			print('<img  src="images/'.$affiche.'" width=40% height=40%></img>');
 
 		}
 	}
 
 	print('<form action ="resa.php" method="GET">');
+	
+//penser à faire un select par tarif pour le nb de places de ce tarif pour pouvoir reserver autant de places qu'on veut de tarifs différents
+	print('<select name="tarif">');
+	print('<option value="tarifPlein">Tarif plein</option>');
+	print('<option value="tarifReduit">Tarif reduit</option>');
+	print('<option value="tarifEnfant">Tarif enfant</option>');
+	print('</select>'); 
 	print('<input type="submit" value="Réserver"/>');
 	print('<input type="hidden" name="lineConfirmation" value="'.$nbSpectacle.'"/>');
-	print('</form>');
+print('</form>');
+	
 	print("</div>");
 	print("</div>");
 	print("</figure>");
@@ -96,17 +104,35 @@ if (isset($_GET["line"])){
 				    print($ligne[7]);
 				    print("<p>votre réservation pour ".$titre." le ".$date." à ".$lieu." ");
 				    
-				    if ($ligne[7]<=0){
+				    $numCol = 0;
+				    $strTarif="";
+					if($_GET['tarif']== "tarifPlein"){
+					   	$numCol=6;
+					   	$strTarif="plein";
+					   }else{
+					   	if($_GET['tarif']== "tarifReduit"){
+					   		$numCol=7;
+					   		$strTarif="réduit";
+					   	}else{
+					   		if($_GET['tarif']== "tarifEnfant"){
+					   			$numCol=11;
+					   			$strTarif="enfant";
+					   		}
+					   	}
+					}
+
+				    if ($ligne[$numCol]<=0){
 				    	//si il n'y a plus de place on ne change pas la ligne
 				    	print(" a échouée</p>");
 		            	$newcontenu[$row] = $ligne;				    	
 				    }else{
-						// on baisse de 1 le nombre de places 'regular' -> colonne 7
-					    $nouvelle_ligne[7] = ($ligne[7])-1;
+						// on baisse de 1 le nombre de places pour le tarif choisi -> $numCol
+					    
+					    $nouvelle_ligne[$numCol] = ($ligne[$numCol])-1;
 		            	$newcontenu[$row] = $nouvelle_ligne;
 		            	print("a bien été effectuée</p>");
 		            }
-		            print("<p>Il reste ".$nouvelle_ligne[7]." places pour cette scéance.</p>");
+		            print("<p>Il reste ".$nouvelle_ligne[$numCol]." places pour cette scéance en tarif ".$strTarif."</p>");
 		        }
 		        // Sinon, on réécri la ligne
 		        else
