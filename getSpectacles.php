@@ -20,25 +20,24 @@
 
             //on affiche ligne apres ligne telle quelle
 
-		print("<table>");
+		
       	$lastDate = explode(",", $spectacles[0])[0];
         foreach ($spectacles as $i => $v){
 
 			print("<tr>");
 			$tabValue = explode(",", $v);
-			
-
-			foreach ($tabValue as $id => $value){
-				if($id==0){
-					if($lastDate != $value){
-						print("</table><table><td>".$value."</td>\n");
-					}else{
-						print("<td></td>\n");
+		
+			if($lastDate != $tabValue){
+				print("<h2>".$value."</h2>");
+			}
+			}else{
+			switch($id){
+						case 2:
+							print("<horaire>".$value."</horaire>");
+						case 3:
+							print("<lieu>".$value."</lieu>");
 					}
-					
-
-				}else{
-					if($id<6)print("<td>".$value."</td>\n");
+					//if($id<6)print("<td>".$value."</td>\n");
 				}
 			}
 			
