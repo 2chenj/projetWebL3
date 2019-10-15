@@ -11,6 +11,7 @@
 
 <?php
 
+<<<<<<< HEAD
 if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
@@ -36,6 +37,36 @@ if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 					echo $fields[2] . ", par " . $fields[5] . " à " . $fields[4] . "\n</div>\n";
 					
 				
+=======
+            // affichage des message de bonjour
+            $cont = file_get_contents("ResultatsFestival.csv");
+
+            // on coupe le contenu du fichier avec le caractere de saut de ligne
+
+            $spectacles = explode("\n", $cont);
+
+            //on affiche ligne apres ligne telle quelle
+
+		
+      	$lastDate = explode(",", $spectacles[0])[0];
+        foreach ($spectacles as $i => $v){
+
+			print("<tr>");
+			$tabValue = explode(",", $v);
+		
+			if($lastDate != $tabValue){
+				print("<h2>".$value."</h2>");
+			}
+			}else{
+			switch($id){
+						case 2:
+							print("<horaire>".$value."</horaire>");
+						case 3:
+							print("<lieu>".$value."</lieu>");
+					}
+					//if($id<6)print("<td>".$value."</td>\n");
+				}
+>>>>>>> 2bedeb68d7a117d8f821406247fc8e837a249e8c
 			}
 			
 		}
