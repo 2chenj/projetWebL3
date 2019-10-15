@@ -11,43 +11,37 @@
 
 <?php
 
-            // affichage des message de bonjour
-            $cont = file_get_contents("ResultatsFestival.csv");
-
-            // on coupe le contenu du fichier avec le caractere de saut de ligne
-
-            $spectacles = explode("\n", $cont);
-
-            //on affiche ligne apres ligne telle quelle
-
-		print("<table>");
-      	$lastDate = explode(",", $spectacles[0])[0];
-        foreach ($spectacles as $i => $v){
-
-			print("<tr>");
-			$tabValue = explode(",", $v);
-			
-
-			foreach ($tabValue as $id => $value){
-				if($id==0){
-					if($lastDate != $value){
-						print("</table><table><td>".$value."</td>\n");
-					}else{
-						print("<td></td>\n");
-					}
+if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
+				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
+				$jour = "null";
+				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 					
-
-				}else{
-					if($id<6)print("<td>".$value."</td>\n");
-				}
+				foreach($data as $value) {
+					$replaced = preg_replace_callback(
+						'/"(\\\\[\\\\"]|[^\\\\"])*"/',
+						function ($match){
+							$temp = preg_replace("[,]", '&#44;', $match);
+							implode($temp);
+							return $temp[0];
+						},
+						$value
+					);
+					
+					$fields = preg_split("[,]", $replaced);
+					if($jour != $fields[0]){
+						$jour = $fields[0];
+						echo "<h2> " . $jour . "</h2>";
+					}
+					echo "<div class= \"Lieu\">\n";
+					echo $fields[2] . ", par " . $fields[5] . " à " . $fields[4] . "\n</div>\n";
+					
+				
 			}
 			
-	        print('<td><form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$i.'"/></form></td>');
-			print("</tr>");
-			$lastDate = $tabValue[0];
-        }
-
-		print("</table>");
+		}
+		
+		fclose($handle);
+	}
 ?>
 
 
