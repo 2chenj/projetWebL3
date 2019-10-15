@@ -19,17 +19,19 @@
             $spectacles = explode("\n", $cont);
 
             //on affiche ligne apres ligne telle quelle
-		$lastDate = "none";
+
 		print("<table>");
+      	$lastDate = explode(",", $spectacles[0])[0];
         foreach ($spectacles as $i => $v){
 
 			print("<tr>");
 			$tabValue = explode(",", $v);
+			
 
 			foreach ($tabValue as $id => $value){
 				if($id==0){
 					if($lastDate != $value){
-						print("<td>".$value."</td>\n");
+						print("</table><table><td>".$value."</td>\n");
 					}else{
 						print("<td></td>\n");
 					}
