@@ -14,8 +14,8 @@
 					<li><a href="getSpectacles.php">jour par jour</a></li>
 					<li> lieu par lieu</li>
 					<li> spectacles </li>
-					<li>tarifs</li>			
-			</ul> 
+					<li>tarifs</li>
+			</ul>
 			<ul>
 
 					<li>le festival </li>
@@ -25,8 +25,8 @@
 					<li> faire un don</li>
 					<li> nous contacter</li>
 		  </ul>
-  </div>  
-  
+  </div>
+
 <?php
 if (isset($_GET["line"])){
 	$nbSpectacle=$_GET["line"];
@@ -62,22 +62,21 @@ if (isset($_GET["line"])){
 		}
 	}
 
-	print('<form action ="resa.php" method="GET">');
+	print('<form action ="panier.php" method="POST">');
 	
-//penser à faire un select par tarif pour le nb de places de ce tarif pour pouvoir reserver autant de places qu'on veut de tarifs différents
-	print('<select name="tarif">');
-	print('<option value="tarifPlein">Tarif plein</option>');
-	print('<option value="tarifReduit">Tarif reduit</option>');
-	print('<option value="tarifEnfant">Tarif enfant</option>');
-	print('</select>'); 
+//selection du nb de places
+	print('<input type="number" name="tarifPlein" value="0" min="0">');
+	print('<input type="number" name="tarifReduit" value="0" min="0">');
+	print('<input type="number" name="tarifEnfant" value="0" min="0">');
 	print('<input type="submit" value="Réserver"/>');
 	print('<input type="hidden" name="lineConfirmation" value="'.$nbSpectacle.'"/>');
 print('</form>');
-	
 	print("</div>");
 	print("</div>");
 	print("</figure>");
 }else{
+	/*
+	//si la réservation est confirmée
 	if(isset($_GET["lineConfirmation"])){
 		$lineConfirmation = $_GET["lineConfirmation"];
 	
@@ -106,16 +105,19 @@ print('</form>');
 				    
 				    $numCol = 0;
 				    $strTarif="";
-					if($_GET['tarif']== "tarifPlein"){
+					if($_GET['tarifPlein']>0){
+						//ajouter panier
 					   	$numCol=6;
 					   	$strTarif="plein";
 					   }else{
-					   	if($_GET['tarif']== "tarifReduit"){
-					   		$numCol=7;
+					   	if($_GET['tarifReduit'] > 0){
+					   		//ajouter panier
+							$numCol=7;
 					   		$strTarif="réduit";
 					   	}else{
 					   		if($_GET['tarif']== "tarifEnfant"){
-					   			$numCol=11;
+					   			//ajouter panier
+								$numCol=11;
 					   			$strTarif="enfant";
 					   		}
 					   	}
@@ -127,8 +129,7 @@ print('</form>');
 		            	$newcontenu[$row] = $ligne;				    	
 				    }else{
 						// on baisse de 1 le nombre de places pour le tarif choisi -> $numCol
-					    
-					    $nouvelle_ligne[$numCol] = ($ligne[$numCol])-1;
+	      		        $nouvelle_ligne[$numCol] = ($ligne[$numCol])-1;
 		            	$newcontenu[$row] = $nouvelle_ligne;
 		            	print("a bien été effectuée</p>");
 		            }
@@ -153,6 +154,7 @@ print('</form>');
     		fclose($fichierecriture);
 		}
 	}
+	*/
 }
 ?>
 

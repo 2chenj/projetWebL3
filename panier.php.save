@@ -1,0 +1,40 @@
+<?php
+	if(!empty($_POST)){ // je verifie que le formulaire a bien été posté
+		$articleDejaExistant = 0;
+		$article_added = $_POST; // j'enregistre les valeurs envoyées dans post (inutile, mais je le fais...)
+
+		if(isset($_COOKIE['panier']) AND !empty($_COOKIE['panier'])) {   // je vérifie que le cookie existe
+			$cart = unserialize($_COOKIE['panier']);  // je recupère les possibles articles déjà dans le panier
+	                foreach ($cart as $id => $value){
+        	                if($value['lineConfirmation'] == $article_added['lineConfirmation']){
+                	                $cart[$id]['tarifPlein'] += $article_added['tarifPlein'];
+                        	        $cart[$id]['tarifReduit'] += $article_added['tarifReduit'];
+                                	$cart[$id]['tarifEnfant'] += $article_added['tarifEnfant'];
+					printf("articleAdded </br>");
+					printf("plein %s</br>", $article_added['tarifPlein']);
+					printf("reduit %s</br>", $article_added['tarifReduit']);
+					printf("enfant %s</br>", $article_added['tarifEnfant']);
+	                                $articleDejaExistant = 1;
+        	                }
+	                }
+		}
+
+		if(!$articleDejaExistant){
+			$cart[] = array(   // j'ajoute dans le tableau cart l'article, avec les informations qui sont dans article
+				'lineConfirmation' 	=> $article_added['lineConfirmation'],
+				'tarifPlein'		=> $article_added['tarifPlein'],
+				'tarifReduit'           => $article_added['tarifReduit'],
+				'tarifEnfant'		=> $article_added['tarifEnfant']
+				);
+		}
+			setcookie('panier', serialize($cart), (time() + 2592000)); // je remplace/ajoute un nouveaux cookie, avec les informations du panier; je garde le cookie pour 2592000 (~1 mois)
+			if(isset($_COOKIE['panier'])){
+				print_r(unserialize($_COOKIE['panier']));
+			}
+	}else{ // si non, j'affiche le tableau pour debugger
+		echo '<pre>';
+		print_r(unserialize($_COOKIE['panier']));
+		echo '</pre>';
+	}
+
+?>
