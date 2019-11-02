@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Theatres de Bourbon</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
+<?php include ("menu.html"); ?>
 
+<div class="bandeau">
+	<h1>Théâtres de Bourbon : Panier </h1>
+</div>
 
+<main>
+	<div class="decalage">
 <?php
 	if(!empty($_POST)){ // je verifie que le formulaire a bien été posté
 		$articleDejaExistant = 0;
@@ -82,5 +79,7 @@
 	}
 
 ?>
+</div>
+</main>
 </body>
 </html>

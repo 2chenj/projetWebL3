@@ -1,32 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>réservation</title>
-    <link rel="stylesheet" href="style.css">
+<?php include ("menu.html"); ?>
 
-  </head>
-  <body>
-  	<div class="menu">
-			<ul>
-					<h3> le site</h3>
-					<li> qui sommes nous ?</li>
-					<li><a href="getSpectacles.php">jour par jour</a></li>
-					<li> lieu par lieu</li>
-					<li> spectacles </li>
-					<li>tarifs</li>
-			</ul>
-			<ul>
+<div class="bandeau">
+	<h1>Théâtres de Bourbon : Réservation </h1>
+</div>
 
-					<li>le festival </li>
-					<li> carte blanche </li>
-					<li> l'association </li>
-					<li> devinir membre </li>
-					<li> faire un don</li>
-					<li> nous contacter</li>
-		  </ul>
-  </div>
-
+<main>
+	<div class="decalage">
 <?php
 if (isset($_GET["line"])){
 	$nbSpectacle=$_GET["line"];
@@ -52,7 +31,7 @@ if (isset($_GET["line"])){
 		}
 	}		
 	
-			print('<div class="decalage">');
+			
 			print('<div class="Spectacle">');
 			print("<h2>".$titre."</h2>");
 			print("<p>la compagnie ".$compagnie." vous présente la pièce ".$titre." le ".$date." au village de ".$village." à ".$heure." dans le ".$lieu.".</p>");
@@ -72,7 +51,7 @@ if (isset($_GET["line"])){
 	print('<input type="hidden" name="lineConfirmation" value="'.$nbSpectacle.'"/>');
 print('</form>');
 	print("</div>");
-	print("</div>");
+	
 	print("</figure>");
 }else{
 	/*
@@ -159,7 +138,8 @@ print('</form>');
 ?>
 
 
-
+	</div>
+	</main>
   </body>
 </html>
 
