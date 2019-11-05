@@ -26,7 +26,8 @@
 	                }
 		}
 		
-		if($articleDejaExistant == 0){
+		//si l'article n'est pas encore dans le panier et qu'on réserve au moins une place
+		if($articleDejaExistant == 0 && ($article_added['tarifPlein!=0'] || $article_added['tarifReduit!=0'] || $article_added['tarifEnfant!=0'])){
 			$cart[] = array(   // j'ajoute dans le tableau cart l'article, avec les informations qui sont dans article
 				'lineReservation' 	=> $article_added['lineReservation'],
 				'tarifPlein'		=> $article_added['tarifPlein'],
