@@ -26,8 +26,10 @@
           } ,
           $lines
         );
-          $fields = preg_split("[,]",$replaced);
 
+          $fields = preg_split("[,]",$replaced);
+          $fields[12] = $cptLine;
+		  $cptLine++;
 
           //former if places
 /*
@@ -59,10 +61,10 @@
         $horaire = $fields[1];
         $titre = $fields[2];
         $compagnie = $fields[5];
-
+		$cptLine = $fields[12];
         print("<p> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . "</horaire> \n");
         print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></p>');
-        $cptLine++;
+
       }//end of foreach $city
 
     }//end of foreach $sousTableau

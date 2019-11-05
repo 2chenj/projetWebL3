@@ -48,10 +48,9 @@ if (isset($_GET["line"])){
 	print('<input type="number" name="tarifReduit" value="0" min="0">');
 	print('<input type="number" name="tarifEnfant" value="0" min="0">');
 	print('<input type="submit" value="Réserver"/>');
-	print('<input type="hidden" name="lineConfirmation" value="'.$nbSpectacle.'"/>');
+	print('<input type="hidden" name="lineReservation" value="'.$nbSpectacle.'"/>');
 print('</form>');
 	print("</div>");
-	
 	print("</figure>");
 }else{
 	/*

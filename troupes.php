@@ -26,7 +26,8 @@
           $lines
         );
           $fields = preg_split("[,]",$replaced);
-
+		  $fields[12] = $cptLine;
+		  $cptLine++;
 
           //former if places
 /*
@@ -57,7 +58,7 @@
         $titre = $fields[2];
         $ville = $fields[3];
         $village = $fields[4];
-
+		$cptLine = $fields[12];
 
         print("<p> <jour> ". $jour. "</jour>, <horaire>". $horaire . "</horaire> , <lieu> au " . $ville . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle> \n");
         print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></p>');
