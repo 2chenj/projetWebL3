@@ -49,9 +49,15 @@
 
     ksort($sousTableau);
     //show hashmap
-    foreach ($sousTableau as $compagnie => $lines) {
-      echo "<h2>".$compagnie."</h2>\n";
-      foreach ($lines as $fields) {
+    $firstTroupe = true;
+		foreach ($sousTableau as $compagnie => $lines) {
+		if($firstTroupe){
+			print("<div class='Spectacle'><h2>".$compagnie."</h2>\n");
+			$firstTroupe = false;
+		}else{
+			print("</div><div class='Spectacle'><h2>".$compagnie."</h2>\n");
+		}
+		  foreach ($lines as $fields) {
         
         $jour = $fields[0];
         $horaire = $fields[1];
@@ -66,6 +72,7 @@
       }//end of foreach $city
 
     }//end of foreach $sousTableau
+    print("</div>");
 
   }else{
     echo "le fchier n'a pas pu être ouvert par fopen";

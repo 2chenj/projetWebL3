@@ -50,12 +50,18 @@
     }//end of while fgetcsv
     ksort($sousTableau);
     //show hashmap
+    $firstCity = true;
     foreach ($sousTableau as $city => $lines) {
       foreach ($lines as $fields) {
         $village = $fields[4];
         if($place != $fields[3]){
           $place = $fields[3];
-          echo "<h2>".$city." à ".$village."</h2>\n";
+          if($firstCity){
+          	print("<div class='Spectacle'><h2>".$city." à ".$village."</h2>\n");
+          	$firstCity = false;
+          }else{
+          	print("</div><div class='Spectacle'><h2>".$city." à ".$village."</h2>\n");
+          }
         }
         $jour = $fields[0];
         $horaire = $fields[1];
@@ -68,7 +74,7 @@
       }//end of foreach $city
 
     }//end of foreach $sousTableau
-
+	print("</div>");
   }else{
     echo "le fchier n'a pas pu être ouvert par fopen";
   }//fin if fopen

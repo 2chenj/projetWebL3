@@ -28,7 +28,11 @@
 					$fields = preg_split("[,]", $replaced);
 					if($jour != $fields[0]){
 						$jour = $fields[0];
-						echo "<h2> " . $jour . "</h2>\n";
+						if($cptLine == 1){
+							print("<div class='Spectacle'><h2> " . $jour . "</h2>\n");
+						}else{
+							print("</div><div class='Spectacle'><h2> " . $jour . "</h2>\n");
+						}
 					}
 			
 					$horaire = $fields[1];
@@ -43,7 +47,9 @@
 					$cptLine++;
 				}
 			}
-		}			
+		}
+		print("</div>");
+		
 
 
 ?>
