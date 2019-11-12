@@ -43,9 +43,6 @@
 		
 			setcookie('panier', serialize($cart), (time() + 2592000)); // je remplace/ajoute un nouveaux cookie, avec les informations du panier; je garde le cookie pour 2592000 (~1 mois)
 			header("Location:panier.php"); //on recharge la page pour afficher le panier
-			if(isset($_COOKIE['panier'])){
-				print_r(unserialize($_COOKIE['panier']));
-			}
 	
 	}else{
 		if(isset($_POST['confirmation']) && isset($_COOKIE['panier'])){
