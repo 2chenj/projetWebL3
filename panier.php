@@ -109,6 +109,8 @@
 			//si la réservation est confirmée
 			// Lecture du fichier CSV.
 			
+			$cart = offrePlaces(unserialize($_COOKIE['panier']));
+
 			if ($monfichier = fopen('ResultatsFestival.csv', 'r'))
 			{
 			    $row = 0; // Variable pour numéroter les lignes
@@ -132,10 +134,11 @@
 						$nouvelle_ligne = $ligne;
 				    	// Si le numéro de la ligne est égal au numéro de ligne d'un article :
 					    if($row!=0){
-					    	foreach(unserialize($_COOKIE['panier']) as $article){
+					    	foreach($cart as $article){
 					    		if($row == $article['lineReservation']){
 										$nouvelle_ligne[6] = ($ligne[6])+$article['tarifPlein'];
 								  		$nouvelle_ligne[7] = ($ligne[7])+$article['tarifReduit'];
+								  		$nouvelle_ligne[8] = ($ligne[8])+$article['offert'];
 								  		$nouvelle_ligne[11] = ($ligne[11])+$article['tarifEnfant'];							  		
 								}
 							}
