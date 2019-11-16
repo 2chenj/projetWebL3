@@ -24,14 +24,9 @@
 	
 				while($n>0 && $panier[$id]['tarifReduit']>0){
 					
+					//on offre la place
 					$panier[$id]['tarifReduit']-=1;
-					
-					if(isset($panier[$id]['offert'])){
-						$panier[$id]['offert']+=1;
-					}else{
-						$panier[$id]['offert']=0;
-					}
-
+					$panier[$id]['offert']+=1;
 					$n-=1;
 					
 				}	        
@@ -45,13 +40,9 @@
 				
 			
 				while($n>0 && $panier[$id]['tarifPlein']>0){
-					
+					//on offre la place
 					$panier[$id]['tarifPlein']-=1;
-					if(isset($panier[$id]['offert'])){
-						$panier[$id]['offert']+=1;
-					}else{
-						$panier[$id]['offert']=0;
-					}
+					$panier[$id]['offert']+=1;
 					$n-=1;
 					
 				}
@@ -66,9 +57,10 @@
 
     function offrePlaces($panier){
     	$nbPlaces = nbPlaces($panier);
-    	if(nbPlaces>0){
-    		$placesAenlever = nbPlaces/5;
+    	if($nbPlaces>0){
+    		$placesAenlever = (int)($nbPlaces/6);
     		if($placesAenlever>0){
+    			print("<h2>places a enlever = ".$placesAenlever."</h2>");
     			$panier = enleveNplaces($placesAenlever,$panier);
     		}
     	}
@@ -88,6 +80,7 @@
                 	                $cart[$id]['tarifPlein'] += $article_added['tarifPlein'];
                         	        $cart[$id]['tarifReduit'] += $article_added['tarifReduit'];
                                 	$cart[$id]['tarifEnfant'] += $article_added['tarifEnfant'];
+                                	$cart[$id]['offert']=0;
 	                                $articleDejaExistant = 1;
         	                }
 	                }
@@ -100,15 +93,16 @@
 				'tarifPlein'		=> $article_added['tarifPlein'],
 				'tarifReduit'           => $article_added['tarifReduit'],
 				'tarifEnfant'		=> $article_added['tarifEnfant'],
-				'tarifEnfant'		=> 0
+				'offert'		=> 0
 				);
 			
 		}
 
-		//$cart =offrePlaces($cart);
+		
 
 		setcookie('panier', serialize($cart), (time() + 2592000)); // je remplace/ajoute un nouveaux cookie, avec les informations du panier; je garde le cookie pour 2592000 (~1 mois)
 		header("Location:panier.php"); //on recharge la page pour afficher le panier
+		print_r($cart);
 				
 	}else{
 		if(isset($_POST['confirmation']) && isset($_COOKIE['panier'])){
@@ -167,7 +161,9 @@
 			if(isset($_COOKIE['panier']) && !empty(unserialize($_COOKIE['panier']))){
 				
 				//si un panier existe
-					foreach(unserialize($_COOKIE['panier']) as $article){
+					//on offre les places uniquement pour l'affichage
+					$cart =offrePlaces(unserialize($_COOKIE['panier']));
+					foreach($cart as $article){
 					
 					$lineReservation =  $article['lineReservation'];
 					if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
@@ -193,7 +189,7 @@
 			    	                	                $village = $fields[4];
 		    	        	                	        $compagnie = $fields[5];
 								}
-								print("<div class='Spectacle'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit et ".$article['tarifEnfant']." places tarif enfant</p>");
+								print("<div class='Spectacle'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
 								print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe></p></div>");
 								break;
 							}
