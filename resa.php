@@ -26,7 +26,7 @@ if (isset($_GET["line"])){
 	//On va chercher l'image du spcectacle
 	$affiches = file('affichesSpectacles.csv');
 	foreach ($affiches as $lineNumberAffiche => $lineContentAffiche){
-		if ($titre == explode(",",$lineContentAffiche)[0]){
+		if (htmlspecialchars($titre) == htmlspecialchars(explode(",",$lineContentAffiche)[0])){
 			$affiche = explode(",",$lineContentAffiche)[1];
 		}
 	}		
