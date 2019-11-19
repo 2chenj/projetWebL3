@@ -28,7 +28,11 @@
 					$fields = preg_split("[,]", $replaced);
 					if($jour != $fields[0]){
 						$jour = $fields[0];
-						echo "<h2> " . $jour . "</h2>\n";
+						if($cptLine == 1){
+							print("<div class='Spectacle'><h2> " . $jour . "</h2>\n");
+						}else{
+							print("</div><div class='Spectacle'><h2> " . $jour . "</h2>\n");
+						}
 					}
 			
 					$horaire = $fields[1];
@@ -38,12 +42,14 @@
 					$compagnie = $fields[5];
 			
 			
-					print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>\n");
-					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></p>');
+					print("<div><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>\n");
+					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></div></br>');
 					$cptLine++;
 				}
 			}
-		}			
+		}
+		print("</div>");
+		
 
 
 ?>

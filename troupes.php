@@ -49,9 +49,15 @@
 
     ksort($sousTableau);
     //show hashmap
-    foreach ($sousTableau as $compagnie => $lines) {
-      echo "<h2>".$compagnie."</h2>\n";
-      foreach ($lines as $fields) {
+    $firstTroupe = true;
+		foreach ($sousTableau as $compagnie => $lines) {
+		if($firstTroupe){
+			print("<div class='Spectacle'><h2>".$compagnie."</h2>\n");
+			$firstTroupe = false;
+		}else{
+			print("</div><div class='Spectacle'><h2>".$compagnie."</h2>\n");
+		}
+		  foreach ($lines as $fields) {
         
         $jour = $fields[0];
         $horaire = $fields[1];
@@ -60,12 +66,13 @@
         $village = $fields[4];
 		$cptLine = $fields[12];
 
-        print("<p> <jour> ". $jour. "</jour>, <horaire>". $horaire . "</horaire> , <lieu> au " . $ville . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle> \n");
-        print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></p>');
+        print("<div> <jour> ". $jour. "</jour>, <horaire>". $horaire . "</horaire> , <lieu> au " . $ville . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>");
+        print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></div></br>');
         $cptLine++;
       }//end of foreach $city
 
     }//end of foreach $sousTableau
+    print("</div>");
 
   }else{
     echo "le fchier n'a pas pu être ouvert par fopen";

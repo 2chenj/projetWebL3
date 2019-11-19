@@ -50,25 +50,42 @@
     }//end of while fgetcsv
     ksort($sousTableau);
     //show hashmap
+    $firstCity = true;
     foreach ($sousTableau as $city => $lines) {
       foreach ($lines as $fields) {
         $village = $fields[4];
         if($place != $fields[3]){
-          $place = $fields[3];
-          echo "<h2>".$city." à ".$village."</h2>\n";
+        	$place = $fields[3];
+        	if($firstCity){
+          		print("<div class='Spectacle'><h2>".$city." à ".$village."</h2>\n");
+          		$firstCity = false;
+          	}else{
+          		print("</div><div class='Spectacle'><h2>".$city." à ".$village."</h2>\n");
+          	}
+		  	//On va chercher l'image du lieu
+			$imgLieux = file('imagesLieux.csv');
+			foreach ($imgLieux as $lineNumberLieu => $lineContentLieu){
+				if ($city == explode(",",$lineContentLieu)[0]){
+					$imgLieu = explode(",",$lineContentLieu)[1];
+					print('<img  src="images/lieux/'.$imgLieu.'" width=40% height=40%></img>');
+				}
+			}
+		
         }
+        // on récupère les données de la ligne
         $jour = $fields[0];
-        $horaire = $fields[1];
-        $titre = $fields[2];
-        $compagnie = $fields[5];
+		$horaire = $fields[1];
+		$titre = $fields[2];
+		$compagnie = $fields[5];
 		$cptLine = $fields[12];
-        print("<p> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . "</horaire> \n");
-        print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></p>');
+
+        print("</br><div> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . "</horaire>\n");
+        print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></div>');
 
       }//end of foreach $city
 
     }//end of foreach $sousTableau
-
+	print("</div>");
   }else{
     echo "le fchier n'a pas pu être ouvert par fopen";
   }//fin if fopen

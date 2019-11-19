@@ -26,7 +26,7 @@ if (isset($_GET["line"])){
 	//On va chercher l'image du spcectacle
 	$affiches = file('affichesSpectacles.csv');
 	foreach ($affiches as $lineNumberAffiche => $lineContentAffiche){
-		if ($titre == explode(",",$lineContentAffiche)[0]){
+		if (htmlspecialchars($titre) == htmlspecialchars(explode(",",$lineContentAffiche)[0])){
 			$affiche = explode(",",$lineContentAffiche)[1];
 		}
 	}		
@@ -36,7 +36,7 @@ if (isset($_GET["line"])){
 			print("<h2>".$titre."</h2>");
 			print("<p>la compagnie ".$compagnie." vous présente la pièce ".$titre." le ".$date." au village de ".$village." à ".$heure." dans le ".$lieu.".</p>");
 			print('<figure id="spectacle">');
-			print('<img  src="images/'.$affiche.'" width=40% height=40%></img>');
+			print('<img  src="images/spectacles/'.$affiche.'" width=40% height=40%></img>');
 
 		}
 	}
