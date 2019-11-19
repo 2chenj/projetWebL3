@@ -1,7 +1,7 @@
 const width_canevas = 1000;
 const height_canevas = 1000;
 const nb_barre = 2;
-const width_barre = 50;				
+const width_barre = 20;				
 
 function line(x1, y1, x2, y2){
 	var c = document.getElementById("dessin");
@@ -56,7 +56,7 @@ function printPlusieuresBarres(width, data){
 			        data[barre]["sj"]*4,
 	         		data[barre]["sa"]*4
 	         	);
-		decalage=decalage+70;
+		decalage=decalage+width_barre+8;
 	}
 }
 
