@@ -8,10 +8,10 @@
 			    {
 
 					
-					$plein = $data[6];
-					$reduit = $data[7];
-					$sj = $data[9];
-					$sa = $data[10];
+					$plein = (int)$data[6] * (15 * 0.1) ;
+					$reduit = (int)$data[7] * (10 * 0.1);
+					$sj = (int)$data[9] * (10 * 0.9);
+					$sa = (int)$data[10] * (15 * 0.9) ;
 					
 					$tab[$row]= (array("plein"=>$plein, "reduit"=>$reduit,"sj"=>$sj,"sa"=>$sa));
 					$row++;

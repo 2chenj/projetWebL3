@@ -1,7 +1,7 @@
-const width_canevas = 1000;
+const width_canevas = 3500;
 const height_canevas = 1000;
 const nb_barre = 2;
-const width_barre = 20;				
+const width_barre = 50;				
 
 function line(x1, y1, x2, y2){
 	var c = document.getElementById("dessin");
@@ -51,10 +51,10 @@ function printPlusieuresBarres(width, data){
 		        printBarre(
 	                decalage,
 	                width,
-			        data[barre]["plein"]*4,
-			        data[barre]["reduit"]*4,
-			        data[barre]["sj"]*4,
-	         		data[barre]["sa"]*4
+			        data[barre]["plein"],
+			        data[barre]["reduit"],
+			        data[barre]["sj"],
+	         		data[barre]["sa"]
 	         	);
 		decalage=decalage+width_barre+8;
 	}
@@ -68,7 +68,7 @@ $.ajax({
 	        
 			
 			
-			line(0,(height_canevas/2),height_canevas,(height_canevas/2));	        
+			line(0,(height_canevas/2),width_canevas,(height_canevas/2));	        
 			printPlusieuresBarres(width_barre,data);	                
 	            
 	}
