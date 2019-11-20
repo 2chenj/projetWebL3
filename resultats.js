@@ -1,7 +1,7 @@
 const width_canevas = 3500;
 const height_canevas = 1000;
 const nb_barre = 2;
-const width_barre = 50;				
+const width_barre = 25;				
 
 function line(x1, y1, x2, y2){
 	var c = document.getElementById("dessin");
@@ -17,7 +17,7 @@ function printCarreHaut(posX, posY, width, heigth, color){
     var ctx = c.getContext("2d");
 	ctx.beginPath();
    	ctx.rect(posX, (height_canevas/2)-posY-heigth, width, heigth);
-   	ctx.stroke();
+   	
 	ctx.fillStyle = color;
 	ctx.fill();
 
@@ -27,10 +27,8 @@ function printCarreBas(posX, posY, width, heigth, color){
 	var c = document.getElementById("dessin");
     var ctx = c.getContext("2d");
 	ctx.beginPath();
-   	ctx.rect(posX, posY, width, heigth);
-   	ctx.stroke();
 	ctx.fillStyle = color;
-	ctx.fill();
+   	ctx.fillRect(posX, posY, width, heigth);
 
 }
 
@@ -45,8 +43,7 @@ function printBarre(decalage,width, plein, reduit, sj, sa){
 	printCarreBas(decalage,acc,width,sa, "yellow");
 }
 
-function printPlusieuresBarres(width, data){
-	var decalage = 0;
+function printPlusieuresBarres(width, data, decalage){
 	for (var barre in data) {
 		        printBarre(
 	                decalage,
@@ -60,16 +57,31 @@ function printPlusieuresBarres(width, data){
 	}
 }
 
+function printAxe(decalage){
+	var c = document.getElementById("dessin");
+    var ctx = c.getContext("2d");
+    ctx.font = '10px serif';
+	for(var i =0; i<height_canevas/2; i+=50){
+		//graduations positives 
+		ctx.fillText((height_canevas/2) - i.toString()/2,decalage,i+10);
+		line(decalage,i,width_canevas,i);
+		//graduations négatives
+		ctx.fillText(- i.toString()/2,decalage,height_canevas/2+ i+10);
+		line(decalage,height_canevas/2+i,width_canevas,height_canevas/2+i);
+	}
+}
+
+
+
 $.ajax({
 	type:'post',
 	url:"getDessin.php",
 	success:function(data){
 	        console.log(data)
-	        
-			
-			
-			line(0,(height_canevas/2),width_canevas,(height_canevas/2));	        
-			printPlusieuresBarres(width_barre,data);	                
+	        var decalage = 200;
+	        printAxe(decalage-20);
+			line(decalage-20,(height_canevas/2),width_canevas,(height_canevas/2));	        
+			printPlusieuresBarres(width_barre,data,decalage);	                
 	            
 	}
 })
