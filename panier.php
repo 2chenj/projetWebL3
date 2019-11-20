@@ -160,59 +160,74 @@
     		fclose($fichierecriture);
 		   
 		}else{
-			// si pas de requète POST, on affiche le panier
-			if(isset($_COOKIE['panier']) && !empty(unserialize($_COOKIE['panier']))){
-				
-				//si un panier existe
-					//on offre les places uniquement pour l'affichage
-					$cart =offrePlaces(unserialize($_COOKIE['panier']));
-					foreach($cart as $article){
-					
-					$lineReservation =  $article['lineReservation'];
-					if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
-		    	                        fgetcsv($handle, 1000, ","); //On retire la 1ere ligne du csv (legendes)
-		            	                $cptLine = 1;
-		                    	        while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
-							if($cptLine==$lineReservation){
-			                            		foreach($data as $value) {
-		    	                                		$replaced = preg_replace_callback(
-		            	                                		'/"(\\\\[\\\\"]|[^\\\\"])*"/',
-				                    	                        function ($match){
-		    		                        	                        $temp = preg_replace("[,]", '&#44;', $match);
-		            		                        	                implode($temp);
-		                    		                        	        return $temp[0];
-			                    		                        },
-		    	                        		                $value
-		            	                        		);
-				    	                                $fields = preg_split("[,]", $replaced);
-				            	                        $jour = $fields[0];
-		    		                	                $horaire = $fields[1];
-			            	                	        $titre = $fields[2];
-		    	                	                	$lieu = $fields[3];
-			    	                	                $village = $fields[4];
-		    	        	                	        $compagnie = $fields[5];
-								}
-								print("<div class='Spectacle'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
-								print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe></p></div>");
-								break;
-							}
-							$cptLine+=1;
-						}
-					}
-				}
-				
-				// formulaire réservation
-					print('<form action ="panier.php" method="POST">');
-		
-				//selection du nb de places
-					print('<input type="submit" value="Réserver"/>');
-					print('<input type="hidden" name="confirmation" value="true"/>');
-					print('</form>');
-					print("</div>");
-					print("</figure>");
+			// VIDE PANIER
+			if($_POST["videPanier"]){
+				setcookie('panier');
+				header("Location:panier.php");
 			}else{
-			//si pas de panier
-			print("<h2> Votre panier est vide</h2>");
+					// si pas de requète POST, on affiche le panier
+					if(isset($_COOKIE['panier']) && !empty(unserialize($_COOKIE['panier']))){
+						
+						//si un panier existe
+						//on offre les places uniquement pour l'affichage
+						$cart =offrePlaces(unserialize($_COOKIE['panier']));
+						foreach($cart as $article){
+						
+							$lineReservation =  $article['lineReservation'];
+							if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
+				    	                        fgetcsv($handle, 1000, ","); //On retire la 1ere 	ligne du csv (legendes)
+				            	                $cptLine = 1;
+				                    	        while (($data = fgetcsv($handle, 1000, "\n")) !== 	FALSE) {
+									if($cptLine==$lineReservation){
+					                    foreach($data as $value) {
+										$replaced = preg_replace_callback(
+											'/"(\\\\[\\\\"]|[^\\\\"])*"/',
+										    function ($match){
+											   	$temp = preg_replace("[,]", '&#44;', $match);
+											   	implode($temp);
+											   	return $temp[0];
+										    },
+											    $value
+										);
+					    	                $fields = preg_split("[,]", $replaced);
+					            	        $jour = $fields[0];
+			    		                	$horaire = $fields[1];
+				            	        	$titre = $fields[2];
+			    	                		$lieu = $fields[3];
+				    	                	$village = $fields[4];
+			    	        	            $compagnie = $fields[5];
+										}
+										print("<div class='Spectacle'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
+										print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe></p></div>");
+										break;
+									}
+									$cptLine+=1;
+								}
+							}
+						}
+				
+						
+						// form vider panier		
+						print('<form action ="panier.php" method="POST">');
+						print('<input type="submit" value="viderPanier"/>');
+						print('<input type="hidden" name="videPanier" value="true"/>');
+						print('</form>');
+						
+						// form réserver
+						print('<form action ="panier.php" method="POST">');
+						print('<input type="submit" value="Réserver"/>');
+						print('<input type="hidden" name="confirmation" value="true"/>');
+						print('</form>');
+
+						print("</div>");
+						print("</figure>");
+
+							
+
+					}else{
+					//si pas de panier
+					print("<h2> Votre panier est vide</h2>");
+					}
 			}
 		}
 	}
