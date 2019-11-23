@@ -57,15 +57,39 @@
 	   $val_non_formate =  getAssocOf2City($tab_assiciative , $ville1, $ville2);
 	   $format1 = preg_replace("~/~","", $val_non_formate);
 	   $format2 = preg_replace("(km|h|min)",":",$format1);
-	   $formated = preg_split("~:~",$format2);	
+	   $formated = preg_split("~:~",$format2);
 
-	   echo " no formaté ".$val_non_formate."</br>";
-	   echo " no / : ".$format1."</br>";
-	   echo "no km : ".$format2."</br>";
-	   echo "taille : ".strlen($format2)."</br>";
-	   print_r($formated);
-
-
+	   foreach( $formated as $value){
+		   if( ! is_numeric($value) ){
+			$index = array_search($value,$formated);
+			echo "</br> index  = ".$index." </br>";
+			unset($formated[$index]);
+		   }
+	   }
+	   $taille_formated = count($formated);
+	   echo " </br> taille du tab  : ".$taille_formated;
+	   $temps_ou_dist = strtolower($temps_ou_dist);
+	   //if they want a distance
+	   if($temps_ou_dist == "d"){
+		   return $formated[0];
+	   // if they want time	   
+	   }else if( $temps_ou_dist == "t"){
+		//we have distance and only min as duration     
+		if( $taille_formated == 2 ){
+			return $formated[1];
+		//other wise some common sense operations
+		}else{
+			$temps_res=0;
+			$fact = 60;
+			foreach($formated as $val){
+				if( array_search($val,$formated) !== 0 ){
+					$temps_res += $val*$fact;
+					$fact = $fact /60;	
+				}
+			}	
+			return $temps_res;
+		}
+	   }
     
     
     }
@@ -73,7 +97,7 @@
 	//min main !!!! 
     echo "indice = ".getIndex( $mon_tab, "Vichy")."</br>";
     echo " val no formaté = ".getAssocOf2City( $mon_tab, "Vichy" ,"Veauce")."</br>";
-    echo " val = ".getDistOrTime($mon_tab,"Vichy","Veauce","d");
+    echo " val = ".getDistOrTime($mon_tab,"Vichy","Moulins","t");
 
 
     
