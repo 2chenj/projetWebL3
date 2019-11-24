@@ -23,13 +23,14 @@ if (isset($_GET["line"])){
 			$village = $lineContentTab[4];
 			$compagnie = $lineContentTab[5];
 	
-	//On va chercher l'image du spcectacle
-	$affiches = file('affichesSpectacles.csv');
-	foreach ($affiches as $lineNumberAffiche => $lineContentAffiche){
-		if (htmlspecialchars($titre) == htmlspecialchars(explode(",",$lineContentAffiche)[0])){
-			$affiche = explode(",",$lineContentAffiche)[1];
-		}
-	}		
+			//On va chercher l'image du spcectacle
+			if ($handle = fopen('affichesSpectacles.csv', 'r')){
+				while (($fields = fgetcsv($handle, 1000)) !== FALSE){
+					if($fields[0] == $titre){
+						$affiche = $fields[1];
+					}
+				}
+			}		
 	
 			
 			print('<div class="Spectacle">');
