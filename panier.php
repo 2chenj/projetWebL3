@@ -116,10 +116,10 @@
 			    $row = 0; // Variable pour numéroter les lignes
 			    $newcontenu = [];
 			    // Lecture du fichier ligne par ligne :
-			    while (($fields = fgetcsv($handle,1000)) !== FALSE)
+			    while (($ligne = fgetcsv($handle,1000)) !== FALSE)
 			    {
 
-			    	$nouvelle_ligne = $fields;
+			    	$nouvelle_ligne = $ligne;
 				    // Si le numéro de la ligne est égal au numéro de ligne d'un article :
 			    	if($row!=0){
 			    		foreach($cart as $article){
@@ -139,7 +139,7 @@
 
 			}
 
-			fclose($monfichier);
+			fclose($handle);
 			$fichierecriture = fopen('ResultatsFestival.csv', 'w');
 			foreach($newcontenu as $nbLine => $lineContent){
 				fputs($fichierecriture, implode($lineContent, ',')."\n");
@@ -148,7 +148,7 @@
 
 		}else{
 			// VIDE PANIER
-			if($_POST["videPanier"]){
+			if(isset($_POST["videPanier"])){
 				setcookie('panier');
 				header("Location:panier.php");
 			}else{
