@@ -1,26 +1,19 @@
-<?php if( ($handle = fopen("distanceEntreVilles.csv","r")) !== FALSE ){
-    fgetcsv($handle,1000,",");
-    $place ="null";
-    $cptLine = 1;
-    //hashmap string -> array of string
-    $mon_tab = [];
-    $villes_et_dist = [];
-    while ( ($allDate = fgetcsv($handle,1000,"\n")) !== FALSE ) {
+<?php
 
-      foreach ($allDate as $lines) {
-		$valTab = preg_split("/,/",$lines);
-		$mon_tab[ array_shift($valTab)] = $valTab;
-      }
-    }
-    //j'affiche mon_tab
-    foreach( $mon_tab as $cle => $sous_tab){
+
+// fonction auxiliaires à serviceWeb
+ 
+//j'affiche mon_tab
+function afficheMonTab($mon_tab){
+    	foreach( $mon_tab as $cle => $sous_tab){
 	    echo $cle."  est associé à : ";
 	    foreach( $sous_tab as $val){
-	    	echo "[".$val."]";
+		echo "[".$val."]";
 	    
-	    }echo "</br>";
-    }
-
+	    }
+	    echo "</br>";
+    	}
+}
 
     //  l'objective de la suite de fonction est de retourner le te temps et les km seperant deux ville doné
     
@@ -62,12 +55,10 @@
 	   foreach( $formated as $value){
 		   if( ! is_numeric($value) ){
 			$index = array_search($value,$formated);
-			echo "</br> index  = ".$index." </br>";
 			unset($formated[$index]);
 		   }
 	   }
 	   $taille_formated = count($formated);
-	   echo " </br> taille du tab  : ".$taille_formated;
 	   $temps_ou_dist = strtolower($temps_ou_dist);
 	   //if they want a distance
 	   if($temps_ou_dist == "d"){
@@ -93,13 +84,69 @@
     
     
     }
+/*
+********************************************************************************************************************************************************
+**************************************************************************************************                                                                                    
+	          *****                                         ***                             ***
+	        ***    ***                                       ***                           ***
+	      ***       ***                                       ***                         ***
+              ***       ***                                        ***                       ***
+                ***                                                 ***                     ***
+                  ***                                                ***         *         ***
+		    ***                                               ***       ***       ***
+                      ***                                              ***     *****     ***
+                       ***                                              ***   *** ***   ***
+              ***     ***                                                *** ***   *** ***
+               ***   ***                                                  *****     *****
+       	          ***		                                           ***       ***
+***************************************************************************************		  
+********************************************************************************************************************************************************		  
+ */	function serviceWeb($ville1, $ville2, $horaire){
+	   
+	   
+ 		if( ($handle = fopen("distanceEntreVilles.csv","r")) !== FALSE ){
+    			fgetcsv($handle,1000,",");
+    			$place ="null";
+    			$cptLine = 1;
+    			//hashmap string -> array of string
+    			$mon_tab = [];
+    			$villes_et_dist = [];
+    			while ( ($allDate = fgetcsv($handle,1000,"\n")) !== FALSE ) {
 
-	//min main !!!! 
-    echo "indice = ".getIndex( $mon_tab, "Vichy")."</br>";
-    echo " val no formaté = ".getAssocOf2City( $mon_tab, "Vichy" ,"Veauce")."</br>";
-    echo " val = ".getDistOrTime($mon_tab,"Vichy","Moulins","t");
+      				foreach ($allDate as $lines) {
+					$valTab = preg_split("/,/",$lines);
+					$mon_tab[ array_shift($valTab)] = $valTab;
+     				 }
+  			  }
+   	    }
+	     
+	    $distance = getDistOrTime($mon_tab, $ville1, $ville2, "d");
+	    $temps = getDistOrTime($mon_tab, $ville1, $ville2, "t");
+	    $tab_horaire = preg_split("~h~",$horaire);
+	    //si l'horaire est comprise entre 17 et 19 augmentent le temp de 10%
+	    if( intval($tab_horaire[0]) > 17 and intval($tab_horaire[0])<19 ){
+	    	$temps = $temps + ($temps * 10)/100;
+	    }
 
+	    return array($distance,$temps);
+    }
+/*
+********************************************************************************************************************************************************
+	************************************************************************************************************************************************
+	*****      ****        ***           ***      ****   ***
+	*** *** *** ***       *****          ***      *****  ***
+	***  *****  ***      *** ***         ***      *** ** ***
+	***   ***   ***     *** * ***        ***      ***  * ***
+	***         ***    ***     ***       ***      ***   ****
+****************************************************************
+*********************************************************************************************************************************************************
+ */
+    $service_web = serviceWeb("Vichy","Monétay","17h30");
+
+    $kilometre = $service_web[0];
+    $hour = $service_web[1];
+
+    echo " disatnce par service web <br> : $kilometre <br> temps par service web <br> : $hour ";
 
     
-}
 ?>
