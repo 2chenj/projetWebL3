@@ -76,7 +76,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight){
 				data[barre]["sj"],
 				data[barre]["sa"]
 			);
-		decalageWidth=decalageWidth+width_barre+8;
+		decalageWidth=decalageWidth+width_barre+espace_barres;
 	}
 }
 

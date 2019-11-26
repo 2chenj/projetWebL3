@@ -50,7 +50,7 @@
 						}
 						//On va chercher l'image du lieu
 
-						if (($handle = fopen("imagesLieux.csv", "r")) !== FALSE) 
+						if (($handle = fopen("csv/imagesLieux.csv", "r")) !== FALSE) 
 						{
 							while (($fieldsDescription = fgetcsv($handle, 1000)) !== FALSE) 
 							{

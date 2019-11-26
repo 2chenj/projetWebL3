@@ -24,7 +24,7 @@ if (isset($_GET["line"])){
 			$compagnie = $lineContentTab[5];
 	
 			//On va chercher l'image du spcectacle
-			if ($handle = fopen('affichesSpectacles.csv', 'r')){
+			if ($handle = fopen('csv/affichesSpectacles.csv', 'r')){
 				while (($fields = fgetcsv($handle, 1000)) !== FALSE){
 					if($fields[0] == $titre){
 						$affiche = $fields[1];

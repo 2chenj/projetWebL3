@@ -2,6 +2,7 @@ const width_canevas = 1700;
 const height_canevas = 1200;
 const nb_barre = 2;
 const width_barre = 25;				
+const espace_barres = 10;				
 
 $.ajax({
 	type:'post',
