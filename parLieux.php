@@ -66,8 +66,7 @@
 
 									print("<p>".$txtLieu."</p>"); 
 											//on ajoute une div avec "clear : both" pour que la taille du bloc .Lieu s'adapte à celle de l'image 
-									print("<style>.Lieu div {clear : both;}</style>");
-									print("<div></div>");
+									print("<div style=clear : both;></div>");
 
 									print("</div>");
 								}
@@ -85,8 +84,8 @@
 						print("<h2>Programme :</h2>");
 						$firstRepresentation = false;
 					}
-					print("</br><div> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . "</horaire>");
-					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></div>');    
+					print("</br><table> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . " </horaire>");
+					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table>');    
 				}//end of foreach $city
 			}//end of foreach $sousTableau
 			print("</div>");

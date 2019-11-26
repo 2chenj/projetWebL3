@@ -1,13 +1,12 @@
 const width_canevas = 1700;
 const height_canevas = 1200;
 const nb_barre = 2;
-const width_barre = 150;				
+const width_barre = 100;				
 
 $.ajax({
 	type:'post',
-	url:"res/resLieu.php",
+	url:"res/resTroupe.php",
 	success:function(data){
-	        console.log(data)
 	        var decalageWidth = 200;
 	        var decalageHeight = 50;
 
