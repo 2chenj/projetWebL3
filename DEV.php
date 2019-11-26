@@ -1,6 +1,4 @@
 <?php
-
-
 // fonction auxiliaires à serviceWeb
  
 //j'affiche mon_tab

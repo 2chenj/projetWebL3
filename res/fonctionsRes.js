@@ -1,9 +1,3 @@
-const width_canevas = 1700;
-const height_canevas = 1000;
-const nb_barre = 2;
-const width_barre = 25;				
-
-
 function line(x1, y1, x2, y2){
 	var c = document.getElementById("dessin");
 	var ctx = c.getContext("2d");
@@ -19,6 +13,7 @@ function printCarreHaut(posX, posY, width, heigth, color){
 	ctx.beginPath();
    	ctx.fillStyle = color;
    	ctx.fillRect(posX, (height_canevas/2)-posY-heigth, width, heigth);
+   	
 
 }
 
@@ -81,11 +76,11 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight){
 				data[barre]["sj"],
 				data[barre]["sa"]
 			);
-		decalageWidth=decalageWidth+width_barre+8;
+		decalageWidth=decalageWidth+width_barre+espace_barres;
 	}
 }
 
-function printAxe(decalageWidth, decalageHeight){
+function printAxe(decalageWidth, decalageHeight,grossisement){
 	var c = document.getElementById("dessin");
     var ctx = c.getContext("2d");
     ctx.font = '10px serif';
@@ -96,7 +91,7 @@ function printAxe(decalageWidth, decalageHeight){
 		text = (height_canevas/2) - i.toString();
 		
 		ctx.fillText( 	
-						text/2 ,
+						text*grossisement ,
 						decalageWidth,
 						decalageHeight + i + 10
 					);
@@ -112,7 +107,7 @@ function printAxe(decalageWidth, decalageHeight){
 		text = - i.toString();
 		
 		ctx.fillText(
-						text/2,
+						text*grossisement,
 						decalageWidth,
 						height_canevas/2 + decalageHeight + i + 10
 					);
@@ -146,20 +141,3 @@ function printLegendes(){
     }
 
 }
-
-
-$.ajax({
-	type:'post',
-	url:"getDessin.php",
-	success:function(data){
-	        console.log(data)
-	        var decalageWidth = 200;
-	        var decalageHeight = 50;
-
-	        printLegendes();
-	        printAxe(decalageWidth-20, decalageHeight);
-			//line(decalageWidth-20,(height_canevas/2),width_canevas,(height_canevas/2));	        
-			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight);	                
-	            
-	}
-})

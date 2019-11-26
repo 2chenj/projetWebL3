@@ -1,97 +1,100 @@
 <?php include ("menu.html"); ?>
 
 <div class="bandeau">
-  <h1>Théâtres de Bourbon : Lieu par lieu </h1>
+	<h1>Théâtres de Bourbon : Lieu par lieu </h1>
 </div>
 
 <main>
-  <div class="decalage">
+	<div class="decalage">
 
-<?php
-  if( ($handle = fopen("ResultatsFestival.csv","r")) !== FALSE ){
-    fgetcsv($handle,1000,",");
-    $place ="null";
-    $cptLine = 1;
-    //hashmap string -> array of string
-    $sousTableau = [];
-    while ( ($allDate = fgetcsv($handle,1000,"\n")) !== FALSE ) {
+		<?php
+		if( ($handle = fopen("ResultatsFestival.csv","r")) !== FALSE )
+		{
+			fgetcsv($handle,1000);
+			$place ="null";
+			$cptLine = 1;
+			//hashmap string -> array of string
+			$sousTableau = [];
+			while ( ($fields = fgetcsv($handle,1000)) !== FALSE ) 
+			{
+				$fields[12] = $cptLine;
+				$cptLine++;
 
-      foreach ($allDate as $lines) {
-        $replaced = preg_replace_callback(
-          '/"(\\\\[\\\\"]|[^\\\\"])*"/',
-            function($match){
-            $tempo = preg_replace("[,]",'&#44;',$match);
-            implode($tempo);
-            return $tempo[0];
-          } ,
-          $lines
-        );
+						//putt the whole line deragmented into the hasmap city -> lines, delim = ","
 
-          $fields = preg_split("[,]",$replaced);
-          $fields[12] = $cptLine;
-		  $cptLine++;
+				$sousTableau[$fields[3]] [] = $fields;
+						//array_push($sousTableau[$fields[3]],$fields);
+						//former fields
 
-          //former if places
-/*
-          if(  ! in_array($fields[3],$sousTableau) ){
-            //if unseen city, create a new map for it
-            $sousTableau[ $fields[3] ]=[];
-          }*/
-          //putt the whole line deragmented into the hasmap city -> lines, delim = ","
+			}//end of while fgetcsv
 
-          $sousTableau[$fields[3]] [] = $fields;
-          //array_push($sousTableau[$fields[3]],$fields);
-          //former fields
-      }
+			ksort($sousTableau);
+				//show hashmap
+			$firstCity = true;
+
+			foreach ($sousTableau as $city => $lines) 
+			{
+				$firstRepresentation = true;
+				foreach ($lines as $fields)
+				{
+					$village = $fields[4];
+					if($place != $fields[3])
+					{
+						$place = $fields[3];
+						if($firstCity)
+						{
+							print("<div class='Lieu'><h2>".$city." à ".$village."</h2>\n");
+							$firstCity = false;
+						}else{
+							print("</div><div class='Lieu'><h2>".$city." à ".$village."</h2>\n");
+						}
+						//On va chercher l'image du lieu
+
+						if (($handle = fopen("csv/imagesLieux.csv", "r")) !== FALSE) 
+						{
+							while (($fieldsDescription = fgetcsv($handle, 1000)) !== FALSE) 
+							{
 
 
+								if ($city == $fieldsDescription[0])
+								{
+									$imgLieu = $fieldsDescription[1];
+									$txtLieu = $fieldsDescription[2];
+											// affichage de l'image
+									print("<div>");
+									print('<figure class = "lieu"><img  src="images/lieux/'.$imgLieu.'" width=100% height=100%></img></figure>'); 
 
+									print("<p>".$txtLieu."</p>"); 
+											//on ajoute une div avec "clear : both" pour que la taille du bloc .Lieu s'adapte à celle de l'image 
+									print("<div style=clear : both;></div>");
 
-    }//end of while fgetcsv
-    ksort($sousTableau);
-    //show hashmap
-    $firstCity = true;
-    foreach ($sousTableau as $city => $lines) {
-      foreach ($lines as $fields) {
-        $village = $fields[4];
-        if($place != $fields[3]){
-        	$place = $fields[3];
-        	if($firstCity){
-          		print("<div class='Spectacle'><h2>".$city." à ".$village."</h2>\n");
-          		$firstCity = false;
-          	}else{
-          		print("</div><div class='Spectacle'><h2>".$city." à ".$village."</h2>\n");
-          	}
-		  	//On va chercher l'image du lieu
-			$imgLieux = file('imagesLieux.csv');
-			foreach ($imgLieux as $lineNumberLieu => $lineContentLieu){
-				if ($city == explode(",",$lineContentLieu)[0]){
-					$imgLieu = explode(",",$lineContentLieu)[1];
-					print('<img  src="images/lieux/'.$imgLieu.'" width=40% height=40%></img>');
-				}
-			}
-		
-        }
-        // on récupère les données de la ligne
-        $jour = $fields[0];
-		$horaire = $fields[1];
-		$titre = $fields[2];
-		$compagnie = $fields[5];
-		$cptLine = $fields[12];
+									print("</div>");
+								}
+							}
+						}
+					}
 
-        print("</br><div> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . "</horaire>\n");
-        print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></div>');
-
-      }//end of foreach $city
-
-    }//end of foreach $sousTableau
-	print("</div>");
-  }else{
-    echo "le fchier n'a pas pu être ouvert par fopen";
-  }//fin if fopen
-?>
-
-</div>
+					 	// on récupère les données de la ligne
+					$jour = $fields[0];
+					$horaire = $fields[1];
+					$titre = $fields[2];
+					$compagnie = $fields[5];
+					$cptLine = $fields[12];
+					if($firstRepresentation){
+						print("<h2>Programme :</h2>");
+						$firstRepresentation = false;
+					}
+					print("</br><table> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . " </horaire>");
+					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table>');    
+				}//end of foreach $city
+			}//end of foreach $sousTableau
+			print("</div>");
+		}else{
+			echo "le fchier n'a pas pu être ouvert par fopen";
+		}
+		?>
+	</div>
 </main>
+
 </body>
 </html>

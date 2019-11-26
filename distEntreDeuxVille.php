@@ -1,4 +1,4 @@
-<?php if( ($handle = fopen("distanceEntreVilles.csv","r")) !== FALSE ){
+<?php if( ($handle = fopen("csv/distanceEntreVilles.csv","r")) !== FALSE ){
     fgetcsv($handle,1000,",");
     $place ="null";
     $cptLine = 1;
