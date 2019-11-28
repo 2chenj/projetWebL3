@@ -32,7 +32,7 @@ function afficheMonTab($mon_tab){
     function getAssocOf2City($tab_assiciative, $ville1, $ville2 ){
 	    $index = getIndex($tab_assiciative, $ville2);
 	    if( $index == -1 ){
-		    echo " nous n'avons aucun spectacle dans cette ville la";
+		    echo " nous n'avons aucun spectacle dans cette ville la</br>";
 		    return;
 	    }
 	    foreach( $tab_assiciative as $cle_ville => $val_tab ){
@@ -88,21 +88,21 @@ function afficheMonTab($mon_tab){
 	          *****                                         ***                             ***
 	        ***    ***                                       ***                           ***
 	      ***       ***                                       ***                         ***
-              ***       ***                                        ***                       ***
-                ***                                                 ***                     ***
-                  ***                                                ***         *         ***
-		    ***                                               ***       ***       ***
-                      ***                                              ***     *****     ***
-                       ***                                              ***   *** ***   ***
-              ***     ***                                                *** ***   *** ***
-               ***   ***                                                  *****     *****
-       	          ***		                                           ***       ***
+          ***       ***                                        ***                       ***
+            ***                                                 ***                     ***
+              ***                                                ***         *         ***
+		        ***                                               ***       ***       ***
+                  ***                                              ***     *****     ***
+                   ***                                              ***   *** ***   ***
+          ***     ***                                                *** ***   *** ***
+           ***   ***                                                  *****     *****
+       	      ***	      	                                           ***       ***
 ***************************************************************************************		  
 ********************************************************************************************************************************************************		  
  */	function serviceWeb($ville1, $ville2, $horaire){
 	   
 	   
- 		if( ($handle = fopen("distanceEntreVilles.csv","r")) !== FALSE ){
+ 		if( ($handle = fopen("csv/distanceEntreVilles.csv","r")) !== FALSE ){
     			fgetcsv($handle,1000,",");
     			$place ="null";
     			$cptLine = 1;
@@ -139,12 +139,23 @@ function afficheMonTab($mon_tab){
 ****************************************************************
 *********************************************************************************************************************************************************
  */
-    $service_web = serviceWeb("Vichy","Monétay","17h30");
+	if( isset($_POST["ville1"]) && isset($_POST["ville2"]) && isset($_POST["horaire"]) ){
+    	$service_web = serviceWeb($_POST["ville1"], $_POST["ville2"], $_POST["horaire"]);
+	
+	   	$kilometre = $service_web[0];
+	   	$hour = $service_web[1];
+	
+    	echo " distance par service web <br> : $kilometre <br> temps par service web <br> : $hour ";
+	}else{
+		print('
+			<form action="DEV.php" method="POST">
+				<p> Ville 1 : <input type="text" name="ville1"/> </p>
+				<p> Ville 2 : <input type="text" name="ville2"/> </p>
+				<p> horaire : <input type="text" name="horaire"/> </p>
+				<input type="submit" name="calculer"/>
+			</form>
+		');
 
-    $kilometre = $service_web[0];
-    $hour = $service_web[1];
-
-    echo " disatnce par service web <br> : $kilometre <br> temps par service web <br> : $hour ";
-
+	}
     
 ?>
