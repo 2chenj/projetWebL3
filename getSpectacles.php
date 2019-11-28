@@ -32,16 +32,48 @@
 				$compagnie = $fields[5];
 
 
-				print("</br><table><horaire>". $horaire . "</horaire>  <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . " </troupe> ");
-				print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table>');
+				print('
+					</br>
+					<div id ='.$cptLine.'>
+						<table>
+							<horaire>'. $horaire .'</horaire>
+							<lieu> au '. $lieu .' à '. $village .'</lieu>,
+							<titrespectacle>'. $titre .'</titrespectacle>, par 
+							<troupe>' . $compagnie . ' </troupe> 
+						
+							<form action ="resa.php" method="GET">
+								<input type="submit" value="Réserver"/>
+								<input type="hidden" name="line" value="'.$cptLine.'"/>
+							</form>
+						</table>
+					</div>
+				');
 				$cptLine++;
 			}
 		}
 		print("</div>");
 
+		?>
 
+		<script>
+			for(var i=1; i<44;i++){
+				var ville = document.getElementById(i).getElementsByTagName("lieu").item(0).textContent.split("à ")[1];
+				
+				var horaire = document.getElementById(i).getElementsByTagName("horaire").item(0).textContent;
+				console.log(ville+"|"+horaire);
+				/*
+				$.ajax({
+					type:"POST",
+					url:"DEV.php",
+					data: "ville1="+ +"&ville2="++"&horaire="+, 
+					success:function(data){
+						document.getElementById(i).innerHTML = data;
+	      			}
+				})
+				*/
+			}
+		</script>
 
-			?>
 		</div>
 	</main>
 </body>

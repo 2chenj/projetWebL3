@@ -32,7 +32,7 @@ function afficheMonTab($mon_tab){
     function getAssocOf2City($tab_assiciative, $ville1, $ville2 ){
 	    $index = getIndex($tab_assiciative, $ville2);
 	    if( $index == -1 ){
-		    echo " nous n'avons aucun spectacle dans cette ville la</br>";
+		    echo " nous n'avons aucun spectacle la ville ".$ville2." </br>";
 		    return;
 	    }
 	    foreach( $tab_assiciative as $cle_ville => $val_tab ){
@@ -139,6 +139,7 @@ function afficheMonTab($mon_tab){
 ****************************************************************
 *********************************************************************************************************************************************************
  */
+
 	if( isset($_POST["ville1"]) && isset($_POST["ville2"]) && isset($_POST["horaire"]) ){
     	$service_web = serviceWeb($_POST["ville1"], $_POST["ville2"], $_POST["horaire"]);
 	
