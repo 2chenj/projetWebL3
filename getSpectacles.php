@@ -57,11 +57,13 @@
 
 		<!-- Script JS qui récupère le lieu et l'horaire de chaque pièce -->
 		<script>
+			console.log( decodeURIComponent(document.cookie);
 			for(var i=1; i<44;i++){
 				var ville = document.getElementById(i).getElementsByTagName("lieu").item(0).textContent.split("à ")[1];
 				
 				var horaire = document.getElementById(i).getElementsByTagName("horaire").item(0).textContent;
-				console.log(ville+":"+horaire);
+				
+			}
 				/*
 				$.ajax({
 					type:"POST",
@@ -72,7 +74,6 @@
 	      			}
 				})
 				*/
-			}
 		</script>
 
 		</div>
