@@ -1,4 +1,4 @@
-function line(x1, y1, x2, y2){
+	function line(x1, y1, x2, y2){
 	var c = document.getElementById("dessin");
 	var ctx = c.getContext("2d");
 	ctx.beginPath();
@@ -65,7 +65,15 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 
 }
 
-function printPlusieuresBarres(width, data, decalageWidth, decalageHeight){
+function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
+	var c = document.getElementById("dessin");
+    var ctx = c.getContext("2d");
+	var cpt =0;
+	ctx.font = '15px serif';
+	
+	var printNoms = (typeof(noms) != 'undefined');
+		
+
 	for (var barre in data) {
 			printBarre(
 				decalageWidth,
@@ -75,7 +83,18 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight){
 				data[barre]["reduit"],
 				data[barre]["sj"],
 				data[barre]["sa"]
-			);
+			);	
+			if(printNoms){
+				// affichage noms
+				ctx.fillStyle = "black";
+				ctx.fillText(
+					noms[cpt],
+					decalageWidth+width_barre/2,
+					height_canevas-10
+				);
+				cpt++;
+			}
+		
 		decalageWidth=decalageWidth+width_barre+espace_barres;
 	}
 }
@@ -118,7 +137,15 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 				width_canevas,
 				height_canevas/2 + decalageHeight + i
 			);
+		
 	}
+	ctx.font = '15px serif';
+	ctx.fillText(
+					"(En Euros)",
+					decalageWidth,
+					decalageHeight - 10
+				);
+	
 }
 
 function printLegendes(){
@@ -139,5 +166,6 @@ function printLegendes(){
     	ctx.fillText(" : tarif ".concat(texts[i]), posX + 20, 15);		
 
     }
+
 
 }

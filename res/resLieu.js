@@ -1,8 +1,8 @@
 const width_canevas = 1700;
 const height_canevas = 1200;
 const nb_barre = 2;
-const width_barre = 150;
-const espace_barres = 100;
+const width_barre = 100;
+const espace_barres = 150;
 
 $.ajax({
 	type:'post',
@@ -14,7 +14,7 @@ $.ajax({
 
 	        printLegendes();
 	        printAxe(decalageWidth-20, decalageHeight,2);
-			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight);	                
+			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight,["1","2","3","4","5","6","7","8"]);	                
 	            
 	}
 })
