@@ -8,13 +8,18 @@ $.ajax({
 	type:'post',
 	url:"res/resLieu.php",
 	success:function(data){
-	        console.log(data)
+	        
 	        var decalageWidth = 200;
 	        var decalageHeight = 50;
-
 	        printLegendes();
 	        printAxe(decalageWidth-20, decalageHeight,2);
-			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight,["1","2","3","4","5","6","7","8"]);	                
-	            
+	        var noms = [];
+	        var cpt=0;
+	        for(var barre in data){
+	        	noms[cpt] = data[barre]["ville"];
+	        	cpt++;
+	        	console.log(noms[cpt]);
+	        }
+			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight,noms);	                
 	}
 })

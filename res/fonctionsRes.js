@@ -71,6 +71,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
 	var cpt =0;
 	ctx.font = '15px serif';
 	
+	// si le paramètre 'noms' est défini, on peut faire l'affichage des noms 
 	var printNoms = (typeof(noms) != 'undefined');
 		
 
@@ -89,7 +90,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
 				ctx.fillStyle = "black";
 				ctx.fillText(
 					noms[cpt],
-					decalageWidth+width_barre/2,
+					decalageWidth,
 					height_canevas-10
 				);
 				cpt++;
