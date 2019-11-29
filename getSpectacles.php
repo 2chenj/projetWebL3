@@ -55,9 +55,30 @@
 
 		?>
 
-		<!-- Script JS qui récupère le lieu et l'horaire de chaque pièce -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script>
-			console.log(decodeURIComponent(document.cookie));
+			//on récupère le cookie panier
+			var panier = eval(decodeURIComponent(document.cookie));
+			//pour chaque article
+			for(var article in panier){
+					console.log(panier[article]);
+				
+					//on récupère la ligne dans le csv de cet article
+					var ligne = panier[article]["lineReservation"];
+					console.log("ligne  => "+ligne);
+					//parcourir le csv pour trouver la ville (doit être exécuté côté serveur, donc il faut appeler un script php)
+					//le script php doit prendre en argument 'ligne' et renvoyer le nom de ville correspondant
+					$.ajax({
+						type:"GET",
+						url:"getVille.php",
+						data: "ligne="+ligne, 
+						success:function(data){
+							console.log("ville = "+data);
+	      				}
+					})
+				
+			}
+			//on récupère le lieu et l'horaire de chaque pièce 
 			for(var i=1; i<44;i++){
 				var ville = document.getElementById(i).getElementsByTagName("lieu").item(0).textContent.split("à ")[1];
 				
