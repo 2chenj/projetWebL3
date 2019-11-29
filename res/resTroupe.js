@@ -13,8 +13,17 @@ $.ajax({
 
 	        printLegendes();
 	        printAxe(decalageWidth-20, decalageHeight,2);
+
+			var noms = [];
+	        var cpt=0;
+	        for(var barre in data){
+	        	noms[cpt] = data[barre]["troupe"];
+	        	cpt++;
+	        	console.log(noms[cpt]);
+	        }
+
 			//line(decalageWidth-20,(height_canevas/2),width_canevas,(height_canevas/2));	        
-			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight);	                
+			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight,noms);	                
 	            
 	}
 })

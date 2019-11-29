@@ -5,7 +5,7 @@ const width_barre = 25;
 const espace_barres = 10;				
 
 $.ajax({
-	type:'post',
+	type:'get',
 	url:"res/resRepresentation.php",
 	success:function(data){
 	        console.log(data)

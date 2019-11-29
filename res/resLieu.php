@@ -49,7 +49,7 @@ if( ($handle = fopen("../ResultatsFestival.csv","r")) !== FALSE )
 			
 			
 				}//end of foreach $city
-						$tab[$row]= (array("plein"=>$plein, "reduit"=>$reduit,"sj"=>$sj,"sa"=>$sa));
+						$tab[$row]= (array("plein"=>$plein, "reduit"=>$reduit,"sj"=>$sj,"sa"=>$sa,"ville"=>$city));
 						$row++;
 						$firstRepresentation = false;
 

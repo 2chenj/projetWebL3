@@ -74,7 +74,7 @@
 		$article_added = $_POST; // j'enregistre les valeurs envoyées dans post 
 		//verfier qu'il y a asser de places
 		if(isset($_COOKIE['panier']) && !empty($_COOKIE['panier'])) {   // je vérifie que le cookie existe
-			$cart = unserialize($_COOKIE['panier']);  // je recupère les possibles articles déjà dans le panier
+			$cart = json_decode($_COOKIE['panier'], true);  // je recupère les possibles articles déjà dans le panier
 			foreach ($cart as $id => $value){
 				if($value['lineReservation'] == $article_added['lineReservation']){
 					$cart[$id]['tarifPlein'] += $article_added['tarifPlein'];
@@ -100,7 +100,7 @@
 
 		
 
-		setcookie('panier', serialize($cart), (time() + 2592000)); // je remplace/ajoute un nouveaux cookie, avec les informations du panier; je garde le cookie pour 2592000 (~1 mois)
+		setcookie('panier', json_encode($cart), (time() + 2592000)); // je remplace/ajoute un nouveaux cookie, avec les informations du panier; je garde le cookie pour 2592000 (~1 mois)
 		header("Location:panier.php"); //on recharge la page pour afficher le panier
 		print_r($cart);
 
@@ -109,7 +109,7 @@
 			//si la réservation est confirmée
 			// Lecture du fichier CSV.
 			
-			$cart = offrePlaces(unserialize($_COOKIE['panier']));
+			$cart = offrePlaces(json_decode($_COOKIE['panier'], true));
 
 			if ($handle = fopen('ResultatsFestival.csv', 'r'))
 			{
@@ -153,11 +153,12 @@
 				header("Location:panier.php");
 			}else{
 					// si pas de requète POST, on affiche le panier
-				if(isset($_COOKIE['panier']) && !empty(unserialize($_COOKIE['panier']))){
-
+				if(isset($_COOKIE['panier']) && !empty(json_decode($_COOKIE['panier'], true))){
+					
 						//si un panier existe
 						//on offre les places uniquement pour l'affichage
-					$cart =offrePlaces(unserialize($_COOKIE['panier']));
+					$cart =offrePlaces(json_decode($_COOKIE['panier'], true));
+
 					foreach($cart as $article){
 						
 						$lineReservation =  $article['lineReservation'];
