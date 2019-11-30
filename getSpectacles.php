@@ -73,27 +73,58 @@
 						url:"getVille.php",
 						data: "ligne="+ligne, 
 						success:function(data){
-							console.log("ville = "+data);
-	      				}
+							
+							var jour1 = data['jour'];
+							var heure1 = data['heure'];
+							var ville1 = data['ville'];
+	      					console.log("ville 1 = "+ville1);
+					
+							for(var i=1; i<44;i++)
+							{
+								(function (i){
+								/*
+								var heure2 = document.getElementById(i).getElementsByTagName("horaire").item(0).textContent;
+								console.log("horaire = "+heure2);
+								var ville2 = document.getElementById(i).getElementsByTagName("lieu").item(0).textContent.split("à ")[1];
+								console.log("ville2 = "+ville2);
+								*/
+								
+								
+								$.ajax({
+									type:"GET",
+									url:"getVille.php",
+									data: "ligne="+i, 
+									success:function(data2){
+										var jour2 = data2['jour'];
+										var heure2 = data2['heure'];
+										var ville2 = data2['ville'];
+										
+										if(jour1==jour2){
+											
+											$.ajax({
+												type:"POST",
+												url:"DEV.php",
+												data: "ville1="+ville1+"&ville2="+ville2+"&horaire="+heure1, 
+												success:function(data){
+													//document.getElementById(i).innerHTML = data;
+													console.log(i+" "+data);
+													//TODO : comparer les horaires 
+	      										}
+											})
+										}
+									}
+								})
+								
+								console.log("i="+i);
+								})(i);
+							}	
+						}
 					})
-				
 			}
 			//on récupère le lieu et l'horaire de chaque pièce 
-			for(var i=1; i<44;i++){
-				var ville = document.getElementById(i).getElementsByTagName("lieu").item(0).textContent.split("à ")[1];
-				
-				var horaire = document.getElementById(i).getElementsByTagName("horaire").item(0).textContent;
-				
-			}
+			
 				/*
-				$.ajax({
-					type:"POST",
-					url:"DEV.php",
-					data: "ville1="+ +"&ville2="++"&horaire="+, 
-					success:function(data){
-						document.getElementById(i).innerHTML = data;
-	      			}
-				})
+				
 				*/
 		</script>
 

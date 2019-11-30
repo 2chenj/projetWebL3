@@ -21,9 +21,9 @@ function afficheMonTab($mon_tab){
 	    $compteur = 0;
 	    foreach( $tab_assiciative as $cle_ville => $tab_val ){
 	    	if ( $cle_ville == $ville){
-			$ind =  $compteur;
-			return $ind;
-		}
+				$ind =  $compteur;
+				return $ind;
+			}
 		$compteur++;
 	    }
 	    return $ind;
@@ -142,11 +142,11 @@ function afficheMonTab($mon_tab){
 
 	if( isset($_POST["ville1"]) && isset($_POST["ville2"]) && isset($_POST["horaire"]) ){
     	$service_web = serviceWeb($_POST["ville1"], $_POST["ville2"], $_POST["horaire"]);
-	
+		
 	   	$kilometre = $service_web[0];
 	   	$hour = $service_web[1];
 	
-    	echo " distance par service web <br> : $kilometre <br> temps par service web <br> : $hour ";
+    	echo $kilometre."|".$hour;
 	}else{
 		print('
 			<form action="DEV.php" method="POST">
