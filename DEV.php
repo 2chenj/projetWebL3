@@ -101,13 +101,13 @@ function afficheMonTab($mon_tab){
 ********************************************************************************************************************************************************		  
  */	function serviceWeb($ville1, $ville2, $horaire){
 	   
-	   
- 		if( ($handle = fopen("csv/distanceEntreVilles.csv","r")) !== FALSE ){
-    			fgetcsv($handle,1000,",");
+	   $mon_tab = [];
+
+ 		if( ($handle = fopen("distanceEntreVilles.csv","r")) !== FALSE ){
+   			fgetcsv($handle,1000,",");
     			$place ="null";
     			$cptLine = 1;
     			//hashmap string -> array of string
-    			$mon_tab = [];
     			$villes_et_dist = [];
     			while ( ($allDate = fgetcsv($handle,1000,"\n")) !== FALSE ) {
 
