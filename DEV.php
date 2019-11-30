@@ -103,7 +103,7 @@ function afficheMonTab($mon_tab){
 	   
 	   $mon_tab = [];
 
- 		if( ($handle = fopen("distanceEntreVilles.csv","r")) !== FALSE ){
+ 		if( ($handle = fopen("csv/distanceEntreVilles.csv","r")) !== FALSE ){
    			fgetcsv($handle,1000,",");
     			$place ="null";
     			$cptLine = 1;
