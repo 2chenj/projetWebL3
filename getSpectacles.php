@@ -57,6 +57,11 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script>
+			function timeToInt(time){
+				var tab = time.split("h");
+				var res = (parseInt(tab[0])*60) + parseInt(tab[1]);
+				return res;
+			}
 			//on récupère le cookie panier
 			var panier = eval(decodeURIComponent(document.cookie));
 			//pour chaque article
@@ -75,47 +80,63 @@
 						success:function(data){
 							
 							var jour1 = data['jour'];
-							var heure1 = data['heure'];
+							var heure1 = timeToInt(data['heure']);
 							var ville1 = data['ville'];
 	      					console.log("ville 1 = "+ville1);
-					
+							console.log("heure1 = "+heure1);
 							for(var i=1; i<44;i++)
 							{
 								(function (i){
-								/*
-								var heure2 = document.getElementById(i).getElementsByTagName("horaire").item(0).textContent;
-								console.log("horaire = "+heure2);
-								var ville2 = document.getElementById(i).getElementsByTagName("lieu").item(0).textContent.split("à ")[1];
-								console.log("ville2 = "+ville2);
-								*/
-								
-								
-								$.ajax({
-									type:"GET",
-									url:"getVille.php",
-									data: "ligne="+i, 
-									success:function(data2){
-										var jour2 = data2['jour'];
-										var heure2 = data2['heure'];
-										var ville2 = data2['ville'];
-										
-										if(jour1==jour2){
+									$.ajax({
+										type:"GET",
+										url:"getVille.php",
+										data: "ligne="+i, 
+										success:function(data2){
+											var jour2 = data2['jour'];
+											var heure2 = timeToInt(data2['heure']);
+											var ville2 = data2['ville'];
 											
-											$.ajax({
-												type:"POST",
-												url:"DEV.php",
-												data: "ville1="+ville1+"&ville2="+ville2+"&horaire="+heure1, 
-												success:function(data){
-													//document.getElementById(i).innerHTML = data;
-													console.log(i+" "+data);
-													//TODO : comparer les horaires 
-	      										}
-											})
+											if(jour1==jour2){
+												
+												$.ajax({
+													type:"POST",
+													url:"DEV.php",
+													data: "ville1="+ville1+"&ville2="+ville2+"&horaire="+heure1, 
+													success:function(data3){
+														//document.getElementById(i).innerHTML = data;
+														console.log(i+": d = "+data3['d']+" t = "+data3['t']+" heure2 = "+heure2);
+														//comparer les horaires 
+														
+														var diffTemps = 0;
+
+														if(heure2 > heure1){
+															var fin1 = heure1 + 120; //on rajoute deux heures à la pièce pour avoir son heure de fin
+															diffTemps = heure2 - fin1;
+															console.log("diffTemps = "+diffTemps);
+															if(diffTemps > 0){
+																if(data3['t'] >= diffTemps){
+																	console.log("OK POUR : "+i);
+																}
+															}else{
+																console.log("PAS LE TEMPS POUR : "+i);
+															}
+
+														}else{
+															var fin2 = heure2 + 120;
+															diffTemps = fin2 - heure1;
+															console.log("diffTemps = "+diffTemps);
+															if(diffTemps > 0){
+																console.log("JE SAIT PAS POUR : "+i);
+															}else{
+																console.log("PAS LE TEMPS POUR : "+i);
+															}
+														}
+
+	      											}
+												})
+											}
 										}
-									}
-								})
-								
-								console.log("i="+i);
+									})
 								})(i);
 							}	
 						}

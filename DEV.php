@@ -139,14 +139,15 @@ function afficheMonTab($mon_tab){
 ****************************************************************
 *********************************************************************************************************************************************************
  */
-
+	header('Content-Type: application/json');
+	
 	if( isset($_POST["ville1"]) && isset($_POST["ville2"]) && isset($_POST["horaire"]) ){
     	$service_web = serviceWeb($_POST["ville1"], $_POST["ville2"], $_POST["horaire"]);
 		
 	   	$kilometre = $service_web[0];
 	   	$hour = $service_web[1];
-	
-    	echo $kilometre."|".$hour;
+		$tab = array('d' => $kilometre, 't' => $hour);
+    	print(json_encode($tab));
 	}else{
 		print('
 			<form action="DEV.php" method="POST">
