@@ -1,5 +1,6 @@
 <?php include ("menu.html"); ?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script  src="testTemps.js"></script>
 <div class="bandeau">
   <h1>Théâtres de Bourbon : Troupe par troupe </h1>
 </div>
@@ -54,8 +55,8 @@
 		$village = $fields[4];
 		$cptLine = $fields[12];
 
-		print("</br><table> <jour> ". $jour. "</jour>, <horaire>". $horaire . "</horaire> , <lieu> au " . $ville . " à " . $village . "</lieu>, <titrespectacle>". $titre ." </titrespectacle> ");
-		print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table>');
+		print("</br><div id=".$cptLine."><table> <jour> ". $jour. "</jour>, <horaire>". $horaire . "</horaire> , <lieu> au " . $ville . " à " . $village . "</lieu>, <titrespectacle>". $titre ." </titrespectacle> ");
+		print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table></div>');
 		$cptLine++;
 	  }//end of foreach $city
 

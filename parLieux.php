@@ -1,5 +1,6 @@
 <?php include ("menu.html"); ?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script  src="testTemps.js"></script>
 <div class="bandeau">
 	<h1>Théâtres de Bourbon : Lieu par lieu </h1>
 </div>
@@ -61,7 +62,7 @@
 									$imgLieu = $fieldsDescription[1];
 									$txtLieu = $fieldsDescription[2];
 											// affichage de l'image
-									print("<div>");
+									print("<div id=".$fields[12].">");
 									print('<figure class = "lieu"><img  src="images/lieux/'.$imgLieu.'" width=100% height=100%></img></figure>'); 
 
 									print("<p>".$txtLieu."</p>"); 
