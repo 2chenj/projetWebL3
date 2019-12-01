@@ -42,7 +42,7 @@
 							<troupe>' . $compagnie . ' </troupe> 
 						
 							<form action ="resa.php" method="GET">
-								<input type="submit" value="Réserver"/>
+								<input type="submit" style="" value="Réserver"/>
 								<input type="hidden" name="line" value="'.$cptLine.'"/>
 							</form>
 						</table>
@@ -61,6 +61,15 @@
 				var tab = time.split("h");
 				var res = (parseInt(tab[0])*60) + parseInt(tab[1]);
 				return res;
+			}
+
+			function intToTime(nb){
+				var nbHeures = parseInt(nb/60);
+				var nbMin = nb-(nbHeures*60);
+				if(nbMin<10){
+					nbMin = nbMin+"0";
+				}
+				return nbHeures+"h"+nbMin;
 			}
 			//on récupère le cookie panier
 			var panier = eval(decodeURIComponent(document.cookie));
@@ -103,32 +112,36 @@
 													url:"DEV.php",
 													data: "ville1="+ville1+"&ville2="+ville2+"&horaire="+heure1, 
 													success:function(data3){
-														//document.getElementById(i).innerHTML = data;
-														console.log(i+": d = "+data3['d']+" t = "+data3['t']+" heure2 = "+heure2);
+														var elt = document.getElementById(i);
+
 														//comparer les horaires 
 														
 														var diffTemps = 0;
 
-														if(heure2 > heure1){
+														if(heure2 >= heure1){
 															var fin1 = heure1 + 120; //on rajoute deux heures à la pièce pour avoir son heure de fin
 															diffTemps = heure2 - fin1;
-															console.log("diffTemps = "+diffTemps);
-															if(diffTemps > 0){
-																if(data3['t'] >= diffTemps){
-																	console.log("OK POUR : "+i);
-																}
+															if((diffTemps > 0) && (data3['t'] <= diffTemps)){
+																console.log("OK POUR : "+i);
 															}else{
 																console.log("PAS LE TEMPS POUR : "+i);
+																elt.style.backgroundColor = "red";
+																elt.rel = "tooltip";
+																elt.title = "Attention, vous avez une resprésentation réservée pour le même jour à "+intToTime(heure1)+" qui finit à "+intToTime(fin1)+ 
+																			" et il y a "+intToTime(data3['t'])+" min de trajet entre les deux salles vous n'aurez donc pas le temps d'assister aux 2 resprésentations";
 															}
 
 														}else{
 															var fin2 = heure2 + 120;
 															diffTemps = fin2 - heure1;
-															console.log("diffTemps = "+diffTemps);
-															if(diffTemps > 0){
-																console.log("JE SAIT PAS POUR : "+i);
+															if((diffTemps > 0) && data3['t'] <= diffTemps){
+																console.log("OK POUR : "+i);
 															}else{
 																console.log("PAS LE TEMPS POUR : "+i);
+																elt.style.backgroundColor = "red";
+																elt.rel = "tooltip";
+																elt.title = "Attention, vous avez une resprésentation réservée pour le même jour à "+intToTime(heure2)+" qui finit à "+intToTime(fin2)+ 
+																			" et il y a "+intToTime(data3['t'])+" min de trajet entre les deux salles vous n'aurez donc pas le temps d'assister aux 2 resprésentations";
 															}
 														}
 
@@ -142,11 +155,7 @@
 						}
 					})
 			}
-			//on récupère le lieu et l'horaire de chaque pièce 
-			
-				/*
-				
-				*/
+
 		</script>
 
 		</div>
