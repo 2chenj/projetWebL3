@@ -105,7 +105,7 @@
 											var heure2 = timeToInt(data2['heure']);
 											var ville2 = data2['ville'];
 											
-											if(jour1==jour2){
+											if(jour1==jour2 && i!=ligne){
 												
 												$.ajax({
 													type:"POST",
