@@ -62,7 +62,7 @@
 									$imgLieu = $fieldsDescription[1];
 									$txtLieu = $fieldsDescription[2];
 											// affichage de l'image
-									print("<div id=".$fields[12].">");
+									print("<div>");
 									print('<figure class = "lieu"><img  src="images/lieux/'.$imgLieu.'" width=100% height=100%></img></figure>'); 
 
 									print("<p>".$txtLieu."</p>"); 
@@ -85,8 +85,8 @@
 						print("<h2>Programme :</h2>");
 						$firstRepresentation = false;
 					}
-					print("</br><table> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . " </horaire>");
-					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table>');    
+					print("</br><div id=".$cptLine."><table> <jour> ". $jour. "</jour>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe>, <horaire>". $horaire . " </horaire>");
+					print('<form action ="resa.php" method="GET"><input type="submit" value="Réserver"/><input type="hidden" name="line" value="'.$cptLine.'"/></form></table></div>');    
 				}//end of foreach $city
 			}//end of foreach $sousTableau
 			print("</div>");
