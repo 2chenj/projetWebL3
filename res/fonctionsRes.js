@@ -1,6 +1,4 @@
-	function line(x1, y1, x2, y2){
-	var c = document.getElementById("dessin");
-	var ctx = c.getContext("2d");
+function line(x1, y1, x2, y2){
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
@@ -8,8 +6,6 @@
 }
 
 function printCarreHaut(posX, posY, width, heigth, color){
-	var c = document.getElementById("dessin");
-    var ctx = c.getContext("2d");
 	ctx.beginPath();
    	ctx.fillStyle = color;
    	ctx.fillRect(posX, (height_canevas/2)-posY-heigth, width, heigth);
@@ -18,8 +14,6 @@ function printCarreHaut(posX, posY, width, heigth, color){
 }
 
 function printCarreBas(posX, posY, width, heigth, color){
-	var c = document.getElementById("dessin");
-    var ctx = c.getContext("2d");
 	ctx.beginPath();
 	ctx.fillStyle = color;
    	ctx.fillRect(posX, posY, width, heigth);
@@ -66,8 +60,6 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 }
 
 function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
-	var c = document.getElementById("dessin");
-    var ctx = c.getContext("2d");
 	var cpt =0;
 	ctx.font = '15px serif';
 	
@@ -101,9 +93,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
 }
 
 function printAxe(decalageWidth, decalageHeight,grossisement){
-	var c = document.getElementById("dessin");
-    var ctx = c.getContext("2d");
-    ctx.font = '10px serif';
+	ctx.font = '10px serif';
     var text = "";
 	for(var i =0; i<height_canevas/2 ; i+=50){
 		//graduations positives 
@@ -150,16 +140,13 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 }
 
 function printLegendes(){
-	var c = document.getElementById("dessin");
-    var ctx = c.getContext("2d");
-    ctx.font = '20px serif';
+	ctx.font = '20px serif';
     
     var colors = ["red","green","blue","yellow"];
     var texts = ["plein","réduit","SJ","SA"]; 
 	var posX = 200;
     
     for(var i = 0; i<4; i++){
-    	
     	posX += 250;
     	ctx.fillStyle = colors[i];	
     	ctx.fillRect(posX,0,20,20);
@@ -167,6 +154,4 @@ function printLegendes(){
     	ctx.fillText(" : tarif ".concat(texts[i]), posX + 20, 15);		
 
     }
-
-
 }

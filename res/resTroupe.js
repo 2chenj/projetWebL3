@@ -3,7 +3,7 @@ const height_canevas = 1200;
 const nb_barre = 2;
 const width_barre = 100;				
 const espace_barres = 70;				
-
+ctx = document.getElementById("dessin").getContext("2d");
 $.ajax({
 	type:'post',
 	url:"res/resTroupe.php",
