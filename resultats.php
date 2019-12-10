@@ -16,6 +16,7 @@
   							</form>
   						</tr>
   				</table>
+				</br>
 
   		
   		<canvas id="dessin" width="1700" height="1200">

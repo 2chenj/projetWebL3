@@ -5,6 +5,9 @@ function line(x1, y1, x2, y2){
 	ctx.stroke(); 
 }
 
+/*
+	
+*/
 function printCarreHaut(posX, posY, width, height, color){
 	var nbPlaces = 0;
 	var tarif = "";
@@ -112,7 +115,7 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 
 function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms){
 	var cpt =0;
-	ctx.font = '15px serif';
+	ctx.font = '10px serif';
 	
 	// si le paramètre 'noms' est défini, on peut faire l'affichage des noms 
 	var printNoms = (typeof(noms) != 'undefined');
@@ -121,7 +124,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 	for (var barre in data) {
 		console.log(data[barre]["plein"]);
 		printBarre(
-				decalageWidth,
+				decalageWidth+15, // pour ne pas etre trop collé aux légendes
 				decalageHeight,
 				width,
 				data[barre]["plein"],
