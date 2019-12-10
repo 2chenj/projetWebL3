@@ -19,22 +19,27 @@ ctx = graph.getContext("2d");
 tabBlocs = [];
 grossisement = 0.5;
 
+// récupèration des valeurs du csv par un script php
 $.ajax({
 	type:'get',
 	url:"res/resRepresentation.php",
 	success:function(data){
 	        console.log(data)
-	        var decalageWidth = 200;
+	        var decalageWidth = 150; // décalage entre les Axes et le reste du graph
 	        var decalageHeight = 50;
 
 	        printLegendes();
-	        printAxe(decalageWidth-20, decalageHeight,grossisement);
-			//line(decalageWidth-20,(height_canevas/2),width_canevas,(height_canevas/2));	        
+	        printAxe(decalageHeight,grossisement);
+			
+			//affichages de toutes les barres 
 			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight);	                
 	            
 	}
 })
 
+/* 	détection de l'entrée de la souris dans une zone d'infobulle et affichage 
+	des infos sur les places réservées correspondants à ce carré
+*/
 graph.addEventListener(
 	"mousemove", 
 	(function(evt) {

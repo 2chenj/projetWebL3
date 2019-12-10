@@ -136,7 +136,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 	for (var barre in data) {
 		console.log(data[barre]["plein"]);
 		printBarre(
-				decalageWidth+15, // pour ne pas etre trop collé aux légendes
+				decalageWidth,
 				decalageHeight,
 				width,
 				data[barre]["plein"],
@@ -163,7 +163,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 
 /*	affiche les axes du graph (les lignes avec le montant en euros correspondant)
 */
-function printAxe(decalageWidth, decalageHeight,grossisement){
+function printAxe(decalageHeight,grossisement){
 	ctx.font = '10px serif';
 	var text = "";
 	for(var i =0; i<height_canevas/2 ; i+=50){
@@ -173,12 +173,12 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 		
 		ctx.fillText( 	
 						text*grossisement ,
-						decalageWidth,
+						0,
 						decalageHeight + i + 10
 					);
 		
 		line(
-				decalageWidth,
+				0,
 				decalageHeight + i,  
 				width_canevas,
 				decalageHeight + i
@@ -189,12 +189,12 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 		
 		ctx.fillText(
 						text*grossisement,
-						decalageWidth,
+						0,
 						height_canevas/2 + decalageHeight + i + 10
 					);
 		
 		line(
-				decalageWidth,
+				0,
 				height_canevas/2 + decalageHeight + i,
 				width_canevas,
 				height_canevas/2 + decalageHeight + i
@@ -204,7 +204,7 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 	ctx.font = '15px serif';
 	ctx.fillText(
 					"(En Euros)",
-					decalageWidth,
+					0,
 					decalageHeight - 10
 				);
 	

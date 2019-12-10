@@ -19,27 +19,35 @@ ctx = graph.getContext("2d");
 tabBlocs = [];
 grossisement = 2;
 
+// récupèration des valeurs du csv par un script php
 $.ajax({
 	type:'post',
 	url:"res/resLieu.php",
 	success:function(data){
 		console.log(data);
-	        var decalageWidth = 200;
+	        var decalageWidth = 150; // décalage entre les Axes et le reste du graph
 	        var decalageHeight = 50;
 	        printLegendes();
-	        printAxe(decalageWidth-20, decalageHeight,2);
-	        var noms = [];
-	        var cpt=0;
+	        printAxe(decalageHeight,2);
+			
+			// récupération des noms des barres (ici les lieux)
+			var noms = [];
+			var cpt=0;
 	        for(var barre in data){
 				noms[cpt] = data[barre]["ville"];
 	        	cpt++;
 				console.log(noms[cpt]);
 				
-	        }
+			}
+			
+			//affichages de toutes les barres 
 			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight,noms);	                
 	}
 })
 
+/* 	détection de l'entrée de la souris dans une zone d'infobulle et affichage 
+	des infos sur les places réservées correspondants à ce carré
+*/
 graph.addEventListener(
 	"mousemove", 
 	(function(evt) {
