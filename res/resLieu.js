@@ -26,7 +26,7 @@ $.ajax({
 	success:function(data){
 		console.log(data);
 	        var decalageWidth = 150; // décalage entre les Axes et le reste du graph
-	        var decalageHeight = 50;
+	        var decalageHeight = 50; 
 	        printLegendes();
 	        printAxe(decalageHeight,2);
 			
