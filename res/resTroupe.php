@@ -25,12 +25,19 @@
 		$sj = 0;
 		$sa = 0;
 		foreach($lines as $fields) {
-			$plein += (int)$fields[6] * (15 * 0.1)  /2;
+			$plein += (int)$fields[6] * (15 * 0.1) /2; 
 			$reduit += (int)$fields[7] * (10 * 0.1) /2;
-			$sj += (int)$fields[9] * (10 * 0.9)     /2;
-			$sa += (int)$fields[10] * (15 * 0.9)    /2;	
+			$sj += (int)$fields[9] * (10 * 0.9) /2;
+			$sa += (int)$fields[10] * (15 * 0.9) /2;	
 		}//end of foreach $city
-		$tab[$row]= (array("plein"=>$plein, "reduit"=>$reduit,"sj"=>$sj,"sa"=>$sa,"troupe"=>$fields[5]));
+	
+		$tab[$row]= (array(
+							"plein"=>$plein,
+						   	"reduit"=>$reduit,
+						   	"sj"=>$sj,
+						   	"sa"=>$sa, 
+						   	"troupe"=>$fields[5]
+						));
 		$row++;
 		
 	}//end of foreach $sousTableau

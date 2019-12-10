@@ -31,17 +31,27 @@ graph.addEventListener(
 		var x = evt.clientX - rect.left;
 		var y = evt.clientY - rect.top;
 		var xd, yd;
+		var text = "";
 		graph.title = "";
-		//console.log("test : x="+x+"  y="+y);
-		//console.log("blocX : "+tabBlocs[0].X +" blocY : "+tabBlocs[0].Y);
+
 		for(var i = 0; i < tabBlocs.length; i ++) {
 			
 			xd = tabBlocs[i].X;
 			yd = tabBlocs[i].Y;
 			
 			if ((x > xd) && (x < xd+tabBlocs[i].width) && (y > yd) && (y < yd+tabBlocs[i].height) ) {
-				graph.title = tabBlocs[i].height*grossisement +" euros de places tarif "+tabBlocs[i].tarif;
+				
+				text = tabBlocs[i].nbPlaces*grossisement +" places tarif "+tabBlocs[i].tarif+" pour "+tabBlocs[i].height*grossisement +" euros";
+				
+				if(tabBlocs[i].tarif == "plein" || tabBlocs[i].tarif == "reduit"){
+					graph.title = text+" de bénéfice";
+				}else{
+					graph.title = text+" de perte";
+				}
+				
 				break;
+			}else{
+				graph.title="";
 			}
 		}
 	}),

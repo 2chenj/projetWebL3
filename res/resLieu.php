@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: application/json');
 if( ($handle = fopen("../ResultatsFestival.csv","r")) !== FALSE )
 		{
 			fgetcsv($handle,1000);
@@ -41,10 +41,10 @@ if( ($handle = fopen("../ResultatsFestival.csv","r")) !== FALSE )
 					}
 
 					 	// on récupère les données de la ligne
-					$plein += (int)$fields[6] * (15 * 0.1)  /2;
+					$plein += (int)$fields[6]  * (15 * 0.1) /2;
 					$reduit += (int)$fields[7] * (10 * 0.1) /2;
-					$sj += (int)$fields[9] * (10 * 0.9)     /2;
-					$sa += (int)$fields[10] * (15 * 0.9)    /2;
+					$sj += (int)$fields[9] * (10 * 0.9) /2;
+					$sa += (int)$fields[10] * (15 * 0.9) /2;
 					
 			
 			

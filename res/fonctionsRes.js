@@ -6,13 +6,15 @@ function line(x1, y1, x2, y2){
 }
 
 function printCarreHaut(posX, posY, width, height, color){
-
+	var nbPlaces = 0;
 	var tarif = "";
 	if(color == "red"){
 		tarif = "plein";
+		nbPlaces = height /(15 * 0.1);
 	}else{
 		if(color == "green"){
 			tarif = "reduit";	
+			nbPlaces = height / (10*0.1);
 		}else{
 			console.log("erreur tarif printCarreHaut");
 		}
@@ -21,7 +23,8 @@ function printCarreHaut(posX, posY, width, height, color){
 		X : posX,
 		Y : (height_canevas/2)-posY-height,
 		width : width,
-		height : height,
+		height : height, 
+		nbPlaces : nbPlaces,
 		tarif : tarif
 		};
 	
@@ -34,12 +37,15 @@ function printCarreHaut(posX, posY, width, height, color){
 }
 
 function printCarreBas(posX, posY, width, height, color){
+	var nbPlaces = 0;
 	var tarif = "";
 	if(color == "blue"){
 		tarif = "sj";
+		nbPlaces = height /(10 * 0.9);
 	}else{
 		if(color == "yellow"){
 			tarif = "sa";
+			nbPlaces = height /(15 * 0.9);
 		}else{
 			console.log("erreur tarif printCarreHaut");
 		}
@@ -50,6 +56,7 @@ function printCarreBas(posX, posY, width, height, color){
 		Y : posY,
 		width : width,
 		height : height,
+		nbPlaces : nbPlaces,
 		tarif : tarif
 		};
 	
@@ -103,23 +110,24 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 
 }
 
-function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
+function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms){
 	var cpt =0;
 	ctx.font = '15px serif';
 	
 	// si le paramètre 'noms' est défini, on peut faire l'affichage des noms 
 	var printNoms = (typeof(noms) != 'undefined');
-		
-	console.log(data);
+	
+
 	for (var barre in data) {
-			printBarre(
+		console.log(data[barre]["plein"]);
+		printBarre(
 				decalageWidth,
 				decalageHeight,
 				width,
 				data[barre]["plein"],
 				data[barre]["reduit"],
 				data[barre]["sj"],
-				data[barre]["sa"]
+				data[barre]["sa"],
 			);	
 			if(printNoms){
 				// affichage noms
