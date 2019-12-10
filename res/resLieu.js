@@ -25,7 +25,7 @@ $.ajax({
 	url:"res/resLieu.php",
 	success:function(data){
 		console.log(data);
-	        var decalageWidth = 150; // décalage du graph avec le menu
+	        var decalageWidth = 180; // décalage du graph avec le menu
 	        var decalageHeight = 50; // décalage entre la légende et le reste du graph 
 	        printLegendes();
 	        printAxe(decalageWidth, decalageHeight,2);

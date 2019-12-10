@@ -23,7 +23,7 @@ $.ajax({
 	type:'post',
 	url:"res/resTroupe.php",
 	success:function(data){
-	        var decalageWidth = 150; // décalage entre les Axes et le reste du graph
+	        var decalageWidth = 180; // décalage entre les Axes et le reste du graph
 	        var decalageHeight = 50; // décalage entre la légende et le reste du graph 
 
 	        printLegendes();
