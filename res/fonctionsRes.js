@@ -5,8 +5,10 @@ function line(x1, y1, x2, y2){
 	ctx.stroke(); 
 }
 
-/*
-	
+/* 	affiche un carré au dessus de la ligne 0 du du graph
+	c-a-d un tarif plein ou un tarif réduit
+	et mémorise ce carré dans les zones d'infobulle
+	avec son nombre de places et le montant correspondant
 */
 function printCarreHaut(posX, posY, width, height, color){
 	var nbPlaces = 0;
@@ -39,6 +41,11 @@ function printCarreHaut(posX, posY, width, height, color){
 
 }
 
+/* 	affiche un carré en dessous de la ligne 0 du du graph
+	c-a-d un tarif SJ ou un tarif SA
+	et mémorise ce carré dans les zones d'infobulle
+	avec son nombre de places et le montant correspondant
+*/
 function printCarreBas(posX, posY, width, height, color){
 	var nbPlaces = 0;
 	var tarif = "";
@@ -72,6 +79,8 @@ function printCarreBas(posX, posY, width, height, color){
 	
 }
 
+/* affichage et stockage des zones d'un barre (représentation, lieu ou troupe)
+ */
 function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa){
 	var acc = -decalageHeight;
 	printCarreHaut(
@@ -113,6 +122,9 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 
 }
 
+/* 	affiche toutes les barres à afficher (représentations, lieux ou troupes) et les noms correspondants 
+	si ils sont donnés par le paramètre 'noms'
+*/
 function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms){
 	var cpt =0;
 	ctx.font = '10px serif';
@@ -148,6 +160,9 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 	console.log(tabBlocs);
 }
 
+
+/*	affiche les axes du graph (les lignes avec le montant en euros correspondant)
+*/
 function printAxe(decalageWidth, decalageHeight,grossisement){
 	ctx.font = '10px serif';
 	var text = "";
@@ -195,6 +210,9 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 	
 }
 
+/*	affiche la légende (au dessus du graph) 
+	pour la correspondance entre les couleurs et les tarifs
+*/
 function printLegendes(){
 	ctx.font = '20px serif';
 	
