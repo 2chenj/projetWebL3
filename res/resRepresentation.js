@@ -39,8 +39,8 @@ graph.addEventListener(
 			xd = tabBlocs[i].X;
 			yd = tabBlocs[i].Y;
 			
-			if ((x > xd) && (x < xd+tabBlocs[i].width) && (y > yd) && (y < yd+tabBlocs[i].heigth) ) {
-				graph.title = tabBlocs[i].heigth*grossisement +" euros de places tarif "+tabBlocs[i].tarif;
+			if ((x > xd) && (x < xd+tabBlocs[i].width) && (y > yd) && (y < yd+tabBlocs[i].height) ) {
+				graph.title = tabBlocs[i].height*grossisement +" euros de places tarif "+tabBlocs[i].tarif;
 				break;
 			}
 		}

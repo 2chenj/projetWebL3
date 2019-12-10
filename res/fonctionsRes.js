@@ -5,43 +5,41 @@ function line(x1, y1, x2, y2){
 	ctx.stroke(); 
 }
 
-function printCarreHaut(posX, posY, width, heigth, color){
-	ctx.beginPath();
-	ctx.fillStyle = color;
-	ctx.fillRect(posX, (height_canevas/2)-posY-heigth, width, heigth);
-	
+function printCarreHaut(posX, posY, width, height, color){
+
 	var tarif = "";
 	if(color == "red"){
-		tarif = "plein"
+		tarif = "plein";
 	}else{
 		if(color == "green"){
-			tarif = "reduit"	
+			tarif = "reduit";	
 		}else{
 			console.log("erreur tarif printCarreHaut");
 		}
 	}
 	var barre = {
 		X : posX,
-		Y : (height_canevas/2)-posY-heigth,
+		Y : (height_canevas/2)-posY-height,
 		width : width,
-		heigth : heigth,
+		height : height,
 		tarif : tarif
 		};
 	
 	tabBlocs.push(barre); 
-}
-
-function printCarreBas(posX, posY, width, heigth, color){
 	ctx.beginPath();
 	ctx.fillStyle = color;
-	ctx.fillRect(posX, posY, width, heigth);
+	ctx.fillRect(posX, (height_canevas/2)-posY-height, width, height);
+	
 
+}
+
+function printCarreBas(posX, posY, width, height, color){
 	var tarif = "";
 	if(color == "blue"){
-		tarif = "sj"
+		tarif = "sj";
 	}else{
 		if(color == "yellow"){
-			tarif = "sa"	
+			tarif = "sa";
 		}else{
 			console.log("erreur tarif printCarreHaut");
 		}
@@ -51,11 +49,17 @@ function printCarreBas(posX, posY, width, heigth, color){
 		X : posX,
 		Y : posY,
 		width : width,
-		heigth : heigth,
+		height : height,
 		tarif : tarif
 		};
 	
 	tabBlocs.push(barre); 
+
+	ctx.beginPath();
+	ctx.fillStyle = color;
+	ctx.fillRect(posX, posY, width, height);
+
+	
 }
 
 function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa){
