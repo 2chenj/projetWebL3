@@ -127,6 +127,7 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 */
 function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms){
 	var cpt =0;
+	var decAxes = 50; //décalage par rapport aux axes
 	ctx.font = '10px serif';
 	
 	// si le paramètre 'noms' est défini, on peut faire l'affichage des noms 
@@ -136,7 +137,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 	for (var barre in data) {
 		console.log(data[barre]["plein"]);
 		printBarre(
-				decalageWidth,
+				decalageWidth+decAxes,
 				decalageHeight,
 				width,
 				data[barre]["plein"],
@@ -149,7 +150,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 				ctx.fillStyle = "black";
 				ctx.fillText(
 					noms[cpt],
-					decalageWidth,
+					decalageWidth+decAxes,
 					height_canevas-10
 				);
 				cpt++;
@@ -163,7 +164,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 
 /*	affiche les axes du graph (les lignes avec le montant en euros correspondant)
 */
-function printAxe(decalageHeight,grossisement){
+function printAxe(decalageWidth,decalageHeight,grossisement){
 	ctx.font = '10px serif';
 	var text = "";
 	for(var i =0; i<height_canevas/2 ; i+=50){
@@ -173,12 +174,12 @@ function printAxe(decalageHeight,grossisement){
 		
 		ctx.fillText( 	
 						text*grossisement ,
-						0,
+						decalageWidth,
 						decalageHeight + i + 10
 					);
 		
 		line(
-				0,
+				decalageWidth,
 				decalageHeight + i,  
 				width_canevas,
 				decalageHeight + i
@@ -189,12 +190,12 @@ function printAxe(decalageHeight,grossisement){
 		
 		ctx.fillText(
 						text*grossisement,
-						0,
+						decalageWidth,
 						height_canevas/2 + decalageHeight + i + 10
 					);
 		
 		line(
-				0,
+				decalageWidth,
 				height_canevas/2 + decalageHeight + i,
 				width_canevas,
 				height_canevas/2 + decalageHeight + i
@@ -204,7 +205,7 @@ function printAxe(decalageHeight,grossisement){
 	ctx.font = '15px serif';
 	ctx.fillText(
 					"(En Euros)",
-					0,
+					decalageWidth,
 					decalageHeight - 10
 				);
 	

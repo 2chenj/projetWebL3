@@ -22,7 +22,6 @@ if( ($handle = fopen("../ResultatsFestival.csv","r")) !== FALSE )
 			}//end of while fgetcsv
 
 			ksort($sousTableau);
-				//show hashmap
 			$firstCity = true;
 
 			
@@ -40,7 +39,7 @@ if( ($handle = fopen("../ResultatsFestival.csv","r")) !== FALSE )
 						$place = $fields[3];
 					}
 
-					 	// on récupère les données de la ligne
+					// on récupère les données de la ligne
 					$plein += (int)$fields[6]  * (15 * 0.1) /2;
 					$reduit += (int)$fields[7] * (10 * 0.1) /2;
 					$sj += (int)$fields[9] * (10 * 0.9) /2;

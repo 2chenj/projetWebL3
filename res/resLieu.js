@@ -25,10 +25,10 @@ $.ajax({
 	url:"res/resLieu.php",
 	success:function(data){
 		console.log(data);
-	        var decalageWidth = 150; // décalage entre les Axes et le reste du graph
+	        var decalageWidth = 150; // décalage du graph avec le menu
 	        var decalageHeight = 50; // décalage entre la légende et le reste du graph 
 	        printLegendes();
-	        printAxe(decalageHeight,2);
+	        printAxe(decalageWidth, decalageHeight,2);
 			
 			// récupération des noms des barres (ici les lieux)
 			var noms = [];

@@ -27,7 +27,7 @@ $.ajax({
 	        var decalageHeight = 50; // décalage entre la légende et le reste du graph 
 
 	        printLegendes();
-	        printAxe(decalageHeight,grossisement);
+	        printAxe(decalageWidth,decalageHeight,grossisement);
 
 			// récupération des noms des barres (ici les troupes)
 			var noms = [];

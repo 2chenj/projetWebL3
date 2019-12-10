@@ -1,7 +1,8 @@
 <?php include ("menu.html"); ?>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		 <script type="text/javascript" src="res/fonctionsRes.js"></script>
-
+				
+				<!-- choix du graph (par représentation, lieu ou troupe) -->
   				<h1>
   				<table>
   						<tr>
@@ -16,9 +17,10 @@
   							</form>
   						</tr>
   				</table>
+				</h1>
 				</br>
 
-  		
+  		<!-- CANVAS -->
   		<canvas id="dessin" width="1700" height="1200">
   			<?php 
 				if(isset($_POST["lieu"])){

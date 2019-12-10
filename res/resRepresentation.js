@@ -29,7 +29,7 @@ $.ajax({
 	        var decalageHeight = 50; // décalage entre la légende et le reste du graph 
 
 	        printLegendes();
-	        printAxe(decalageHeight,grossisement);
+	        printAxe(decalageWidth,decalageHeight,grossisement);
 			
 			//affichages de toutes les barres 
 			printPlusieuresBarres(width_barre, data, decalageWidth, decalageHeight);	                
