@@ -9,7 +9,7 @@
                 "text5",
                 "text6",
                 "text7"
-            ]
+            ];
 
             var graph;
             var xPadding = 30;
@@ -72,7 +72,7 @@
                 var x = evt.clientX - rect.left;
                 var y = evt.clientY - rect.top;
                 var xd, yd;
-
+                console.log("test : x="+x+"  y="+y);
                 graph.title = "";
     			for(var i = 0; i < data.values.length; i ++) {
                     

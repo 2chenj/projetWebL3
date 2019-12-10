@@ -3,7 +3,10 @@ const height_canevas = 1200;
 const nb_barre = 2;
 const width_barre = 100;				
 const espace_barres = 70;				
-ctx = document.getElementById("dessin").getContext("2d");
+c = document.getElementById("dessin");
+ctx = c.getContext("2d");
+tabBlocs = [];
+
 $.ajax({
 	type:'post',
 	url:"res/resTroupe.php",

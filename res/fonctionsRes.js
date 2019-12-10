@@ -7,17 +7,55 @@ function line(x1, y1, x2, y2){
 
 function printCarreHaut(posX, posY, width, heigth, color){
 	ctx.beginPath();
-   	ctx.fillStyle = color;
-   	ctx.fillRect(posX, (height_canevas/2)-posY-heigth, width, heigth);
-   	
-
+	ctx.fillStyle = color;
+	ctx.fillRect(posX, (height_canevas/2)-posY-heigth, width, heigth);
+	
+	var tarif = "";
+	if(color == "red"){
+		tarif = "plein"
+	}else{
+		if(color == "green"){
+			tarif = "reduit"	
+		}else{
+			console.log("erreur tarif printCarreHaut");
+		}
+	}
+	var barre = {
+		X : posX,
+		Y : (height_canevas/2)-posY-heigth,
+		width : width,
+		heigth : heigth,
+		tarif : tarif
+		};
+	
+	tabBlocs.push(barre); 
 }
 
 function printCarreBas(posX, posY, width, heigth, color){
 	ctx.beginPath();
 	ctx.fillStyle = color;
-   	ctx.fillRect(posX, posY, width, heigth);
+	ctx.fillRect(posX, posY, width, heigth);
 
+	var tarif = "";
+	if(color == "blue"){
+		tarif = "sj"
+	}else{
+		if(color == "yellow"){
+			tarif = "sa"	
+		}else{
+			console.log("erreur tarif printCarreHaut");
+		}
+	}
+
+	var barre = {
+		X : posX,
+		Y : posY,
+		width : width,
+		heigth : heigth,
+		tarif : tarif
+		};
+	
+	tabBlocs.push(barre); 
 }
 
 function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa){
@@ -30,6 +68,7 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 					"red"
 				  );
 
+		
 	acc += plein;
 	printCarreHaut(
 					decalageWidth,
@@ -38,7 +77,8 @@ function printBarre(decalageWidth, decalageHeight, width, plein, reduit, sj, sa)
 					reduit ,
 					"green"
 				  );
-
+	
+	
 	acc = (height_canevas/2) + decalageHeight;
 	printCarreBas(
 					decalageWidth,
@@ -66,7 +106,7 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
 	// si le paramètre 'noms' est défini, on peut faire l'affichage des noms 
 	var printNoms = (typeof(noms) != 'undefined');
 		
-
+	console.log(data);
 	for (var barre in data) {
 			printBarre(
 				decalageWidth,
@@ -90,11 +130,12 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight,noms){
 		
 		decalageWidth=decalageWidth+width_barre+espace_barres;
 	}
+	console.log(tabBlocs);
 }
 
 function printAxe(decalageWidth, decalageHeight,grossisement){
 	ctx.font = '10px serif';
-    var text = "";
+	var text = "";
 	for(var i =0; i<height_canevas/2 ; i+=50){
 		//graduations positives 
 		
@@ -141,17 +182,19 @@ function printAxe(decalageWidth, decalageHeight,grossisement){
 
 function printLegendes(){
 	ctx.font = '20px serif';
-    
-    var colors = ["red","green","blue","yellow"];
-    var texts = ["plein","réduit","SJ","SA"]; 
+	
+	var colors = ["red","green","blue","yellow"];
+	var texts = ["plein","réduit","SJ","SA"]; 
 	var posX = 200;
-    
-    for(var i = 0; i<4; i++){
-    	posX += 250;
-    	ctx.fillStyle = colors[i];	
-    	ctx.fillRect(posX,0,20,20);
-    	ctx.fillStyle = "black";
-    	ctx.fillText(" : tarif ".concat(texts[i]), posX + 20, 15);		
+	
+	for(var i = 0; i<4; i++){
+		posX += 250;
+		ctx.fillStyle = colors[i];	
+		ctx.fillRect(posX,0,20,20);
+		ctx.fillStyle = "black";
+		ctx.fillText(" : tarif ".concat(texts[i]), posX + 20, 15);		
 
-    }
+	}
 }
+
+

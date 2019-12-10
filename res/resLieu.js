@@ -1,10 +1,11 @@
-ctx = document.getElementById("dessin").getContext("2d");
+c = document.getElementById("dessin");
+ctx = c.getContext("2d");
 const width_canevas = 1700;
 const height_canevas = 1200;
 const nb_barre = 2;
 const width_barre = 100;
 const espace_barres = 150;
-
+tabBlocs = [];
 
 $.ajax({
 	type:'post',
