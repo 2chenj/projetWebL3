@@ -1,3 +1,14 @@
+/*	VARIABLES GLOBALES :
+	width_canevas : largeur du canevas
+	height_canevas : hauteur du canevas
+	width_barre : largeur de chaque barre
+	espace_barres : espace entre chaque barre
+	graph : le canvas
+	ctx : le context (pour dessiner)
+	tabBlocs : le tableau contenant les zones (carrées) pour les infobulles avec leurs valeurs associées
+	grossisement : zoom du graph (valeur par laquelle multiplier les valeurs d'affichage pour obtenir 
+					les vraies valeurs, sert aussi pour les valeurs sur les axes)
+*/
 const width_canevas = 1700;
 const height_canevas = 1200;
 const nb_barre = 2;
