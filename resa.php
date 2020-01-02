@@ -45,14 +45,26 @@ if (isset($_GET["line"])){
 	print('<form action ="panier.php" method="POST">');
 	
 	//selection du nb de places
-	print('<input type="number" name="tarifPlein" value="0" min="0">');
-	print('<input type="number" name="tarifReduit" value="0" min="0">');
-	print('<input type="number" name="tarifEnfant" value="0" min="0">');
-	print('<input type="submit" value="Réserver"/>');
-	print('<input type="hidden" name="lineReservation" value="'.$nbSpectacle.'"/>');
-print('</form>');
-	print("</div>");
-	print("</figure>");
+	print('
+			<table>
+				<tr>
+					<td>tarif plein</td>
+					<td>tarif réduit</td>
+					<td>tarif enfant</td>
+
+				</tr>
+				<tr>
+					<td><input type="number" name="tarifPlein" value="0" min="0"></td>
+					<td><input type="number" name="tarifReduit" value="0" min="0"></td>
+					<td><input type="number" name="tarifEnfant" value="0" min="0"></td>
+					<td><input type="submit" value="Réserver"/></td>
+					<input type="hidden" name="lineReservation" value="'.$nbSpectacle.'"/>
+				</tr>
+			</table>
+	</form>
+	</div>
+	</figure>
+	');
 }
 ?>
 
