@@ -60,7 +60,6 @@
 			if($nbPlaces>0){
 				$placesAenlever = (int)($nbPlaces/6);
 				if($placesAenlever>0){
-					print("<h2>places a enlever = ".$placesAenlever."</h2>");
 					$panier = enleveNplaces($placesAenlever,$panier);
 				}
 			}
@@ -143,6 +142,7 @@
 			$fichierecriture = fopen('ResultatsFestival.csv', 'w');
 			foreach($newcontenu as $nbLine => $lineContent){
 				fputs($fichierecriture, implode($lineContent, ',')."\n");
+				
 			}
 			fclose($fichierecriture);
 

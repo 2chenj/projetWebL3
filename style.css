@@ -123,10 +123,7 @@ main{
 }
 
 .decalage{ 
-/*Décaler le texte pour voir la statue...*/
- padding: 0% 5% 0% 35%;
- font-size: 100%
-}
+/*Décaler le texte pour voir la statue...*/padding: 0% 5% 0% 35%;font-size: 100%;}
 /*Decaler le texte pour voir la statue...*/
 .decalage30{ 
  padding: 0% 5% 0% 30%;
