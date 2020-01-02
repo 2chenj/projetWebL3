@@ -9,6 +9,11 @@
 		</div>
 											<h1> Festival Théâtres de Bourbon </h1>
 	</div>
+	<div class="decalage">
+		<div class="Spectacle">
+			<iframe width=1060 height=1200 src="images/PdfFlyerA4RectoVerso.pdf"></iframe>
+ 		</div>
+ 	</div>
 
   </body>
 </html>

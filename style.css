@@ -25,14 +25,14 @@ html {
     height: 100%;
 }
 body {
-		color:white;		
-		background-color: #B5CD51; 
-		font-family:  Vijaya, Garamond, sans-serif; 
+		color:white;
+		background-color: #B5CD51;
+		font-family:  Vijaya, Garamond, sans-serif;
 		font-size: 100%;
-		background-image:url(images/peleMele.jpg);
+		background-image: url(images/peleMele.jpg);
 		background-size: 100%;
 		background-repeat: repeat;
- }
+	}
  
 .riquiqui{
 	font-size:60%;

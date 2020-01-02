@@ -129,7 +129,6 @@ function printPlusieuresBarres(width, data, decalageWidth, decalageHeight, noms)
 	var cpt =0;
 	var decAxes = 50; //décalage par rapport aux axes
 	ctx.font = '10px serif';
-	
 	// si le paramètre 'noms' est défini, on peut faire l'affichage des noms 
 	var printNoms = (typeof(noms) != 'undefined');
 	
