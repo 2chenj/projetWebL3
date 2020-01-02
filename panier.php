@@ -126,7 +126,9 @@
 			    				$nouvelle_ligne[6] = ($ligne[6])+$article['tarifPlein'];
 			    				$nouvelle_ligne[7] = ($ligne[7])+$article['tarifReduit'];
 			    				$nouvelle_ligne[8] = ($ligne[8])+$article['offert'];
-			    				$nouvelle_ligne[11] = ($ligne[11])+$article['tarifEnfant'];							  		
+			    				$nouvelle_ligne[11] = ($ligne[11])+$article['tarifEnfant'];
+			    				$total = $article['tarifPlein']*15+$article['tarifReduit']*10+$article['tarifEnfant'];
+			    				print("<p>Vous avez réservé ".$article['tarifPlein']." places tarif Plein, ".$article['tarifReduit']." places tarif réduit et ".$article['tarifEnfant']." places tarif enfant pour un total de ".$total." euros. </p>");							  		
 			    			}
 			    		}
 			    	}
@@ -142,7 +144,7 @@
 			$fichierecriture = fopen('ResultatsFestival.csv', 'w');
 			foreach($newcontenu as $nbLine => $lineContent){
 				fputs($fichierecriture, implode($lineContent, ',')."\n");
-				
+
 			}
 			fclose($fichierecriture);
 
@@ -174,9 +176,9 @@
 				    	                        			$lieu = $fields[3];
 				    	                        			$village = $fields[4];
 				    	                        			$compagnie = $fields[5];
-				    	                        		
+				    	                        		$total = $article['tarifPlein']*15+$article['tarifReduit']*10+$article['tarifEnfant'];
 				    	                        		print("<div class='Spectacle'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
-				    	                        		print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe></p></div>");
+				    	                        		print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe> pour un total de ".$total." euros.</p></div>");
 				    	                        		break;
 				    	                        	}
 				    	                        	$cptLine+=1;
