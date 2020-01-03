@@ -15,11 +15,11 @@ function printCarreHaut(posX, posY, width, height, color){
 	var tarif = "";
 	if(color == "red"){
 		tarif = "plein";
-		nbPlaces = float(height) /(15 * 0.1);
+		nbPlaces = height /(15 * 0.1);
 	}else{
 		if(color == "green"){
 			tarif = "reduit";	
-			nbPlaces = float(height) / (10*0.1);
+			nbPlaces = height / (10*0.1);
 		}else{
 			console.log("erreur tarif printCarreHaut");
 		}
@@ -51,11 +51,11 @@ function printCarreBas(posX, posY, width, height, color){
 	var tarif = "";
 	if(color == "blue"){
 		tarif = "sj";
-		nbPlaces = float(height) /(10 * 0.9);
+		nbPlaces = height /(10 * 0.9);
 	}else{
 		if(color == "yellow"){
 			tarif = "sa";
-			nbPlaces = float(height) /(15 * 0.9);
+			nbPlaces = height /(15 * 0.9);
 		}else{
 			console.log("erreur tarif printCarreHaut");
 		}
