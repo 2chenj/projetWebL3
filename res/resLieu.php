@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-if( ($handle = fopen("../ResultatsFestival.csv","r")) !== FALSE )
+if( ($handle = fopen("../csv/ResultatsFestival.csv","r")) !== FALSE )
 		{
 			fgetcsv($handle,1000);
 			$place ="null";

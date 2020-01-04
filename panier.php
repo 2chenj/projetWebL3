@@ -110,7 +110,7 @@
 			
 			$cart = offrePlaces(json_decode($_COOKIE['panier'], true));
 
-			if ($handle = fopen('ResultatsFestival.csv', 'r'))
+			if ($handle = fopen('csv/ResultatsFestival.csv', 'r'))
 			{
 			    $row = 0; // Variable pour numéroter les lignes
 			    $newcontenu = [];
@@ -141,7 +141,7 @@
 			}
 
 			fclose($handle);
-			$fichierecriture = fopen('ResultatsFestival.csv', 'w');
+			$fichierecriture = fopen('csv/ResultatsFestival.csv', 'w');
 			foreach($newcontenu as $nbLine => $lineContent){
 				fputs($fichierecriture, implode($lineContent, ',')."\n");
 
@@ -164,7 +164,7 @@
 					foreach($cart as $article){
 						
 						$lineReservation =  $article['lineReservation'];
-						if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
+						if (($handle = fopen("csv/ResultatsFestival.csv", "r")) !== FALSE) {
 				    	                        fgetcsv($handle, 1000); //On retire la 1ere 	ligne du csv (legendes)
 				    	                        $cptLine = 1;
 				    	                        while (($fields = fgetcsv($handle, 1000)) !== 	FALSE) {

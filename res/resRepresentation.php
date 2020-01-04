@@ -1,7 +1,7 @@
 <?php 
         header('Content-Type: application/json');
 		$row = 0;
-		if ($handle = fopen('../ResultatsFestival.csv', 'r'))
+		if ($handle = fopen('../csv/ResultatsFestival.csv', 'r'))
 			{
 			fgetcsv($handle, 1000, ","); //On ignore la 1ere ligne du csv (legendes)
 			while (($data = fgetcsv($handle,1000,",")) !== FALSE)

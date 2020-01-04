@@ -1,7 +1,7 @@
 
 <?php
 	$tableauBidimension = array();
-if (($handle = fopen("distanceEntreVilles.csv", "r")) !== FALSE) {
+if (($handle = fopen("csv/distanceEntreVilles.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000,",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
 				$cptLine = 1;

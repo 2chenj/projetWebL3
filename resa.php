@@ -9,7 +9,7 @@
 <?php
 if (isset($_GET["line"])){
 	$nbSpectacle=$_GET["line"];
-	$spectacles = file('ResultatsFestival.csv');
+	$spectacles = file('csv/ResultatsFestival.csv');
 
 	//On parcourt le tableau $spectacles
 	foreach ($spectacles as $lineNumber => $lineContent){
