@@ -22,7 +22,7 @@
 			{
 				if ($row == $nbSpectacle)
 				{
-					
+					// si c'est la représentation qu'on cherche, on récupère ses données
 					$date      = $fields[0];
 					$heure     = $fields[1];
 					$titre     = $fields[2];
@@ -39,20 +39,21 @@
 						}
 					}		
 			
+					//on génére le début de la page avec le texte qui décrit la représentation et l'affiche du spectacle
 					print('<div class="Spectacle">');
 					print("<h2>".$titre."</h2>");
 					print("<p>la compagnie ".$compagnie." vous présente la pièce ".$titre." le ".$date." au village de ".$village." à ".$heure." dans le ".$lieu.".</p>");
 					print('<figure id="spectacle">');
-					print('<img  src="images/spectacles/'.$affiche.'" width=40% height=40%></img>');
+					print('<img  src="images/spectacles/'.$affiche.'" width=60% height=60%></img>');
 					
 				}
 				$row++;
 			}
 		}
 	
+
+		//formulaire vers panier.php pour le choix du nombre et du tarif des places
 		print('<form action ="panier.php" method="POST">');
-		
-		//selection du nb de places
 		print('
 				<table>
 					<tr>
