@@ -1,6 +1,7 @@
 
 <?php include ("menu.html"); ?>
-
+ 
+ <!-- on enlève l'image "peleMele" pour avoir plus de place pour le graph-->
 <style type="text/css">
   body{
     background-image: url();
