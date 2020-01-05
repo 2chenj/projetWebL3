@@ -1,61 +1,56 @@
 <?php
-header('Content-Type: application/json');
-if( ($handle = fopen("../csv/ResultatsFestival.csv","r")) !== FALSE )
+	//on indique que le contenu est du JSON
+	header('Content-Type: application/json');
+	
+	//lecture csv ResultatsFestival
+	if( ($handle = fopen("../csv/ResultatsFestival.csv","r")) !== FALSE )
+	{
+		fgetcsv($handle,1000);
+		$place ="null";
+		$cptLine = 1;
+		$sousTableau = [];
+	
+		while ( ($fields = fgetcsv($handle,1000)) !== FALSE ) 
 		{
-			fgetcsv($handle,1000);
-			$place ="null";
-			$cptLine = 1;
-			//hashmap string -> array of string
-			$sousTableau = [];
-			$row=0;
-			while ( ($fields = fgetcsv($handle,1000)) !== FALSE ) 
+			//on ajoute le numéro de la ligne à chaque fin de ligne dans la nouvelle colonne 12
+			$fields[12] = $cptLine;
+			$cptLine++;
+			//On ajoute la ligne qu'on est en train de parcourir au tableau "sousTableau" à l'index correspondant à la ville de cette ligne 
+			$sousTableau[$fields[3]] [] = $fields;
+		}//end of while fgetcsv
+	
+		//on trie le tableau
+		ksort($sousTableau);
+		$place = null;
+		$row=0;
+		
+		foreach ($sousTableau as $city => $lines) 
+		{
+			//pour chaque ville dans "sousTableau" on a une ou plusieures lignes
+			$plein = 0;
+			$reduit = 0;
+			$sj = 0;
+			$sa = 0;
+			foreach ($lines as $fields)
 			{
-				$fields[12] = $cptLine;
-				$cptLine++;
+				// on récupère les données de la ligne et les ajoute au total de la ville
+				$plein += (int)$fields[6]  * (15 * 0.1) /2;
+				$reduit += (int)$fields[7] * (10 * 0.1) /2;
+				$sj += (int)$fields[9] * (10 * 0.9) /2;
+				$sa += (int)$fields[10] * (15 * 0.9) /2;
+		
+			}//end of foreach $city
+			//on enregistre les résultats de la ville dans "tab"				
+			$tab[$row]= (array("plein"=>$plein, "reduit"=>$reduit,"sj"=>$sj,"sa"=>$sa,"ville"=>$city));
+			$row++;
+		}//end of foreach $sousTableau
 
-						//putt the whole line deragmented into the hasmap city -> lines, delim = ","
-
-				$sousTableau[$fields[3]] [] = $fields;
-						//array_push($sousTableau[$fields[3]],$fields);
-						//former fields
-
-			}//end of while fgetcsv
-
-			ksort($sousTableau);
-			$firstCity = true;
-
-			
-			foreach ($sousTableau as $city => $lines) 
-			{
-				$plein = 0;
-				$reduit = 0;
-				$sj = 0;
-				$sa = 0;
-				foreach ($lines as $fields)
-				{
-					$village = $fields[4];
-					if($place != $fields[3])
-					{
-						$place = $fields[3];
-					}
-
-					// on récupère les données de la ligne
-					$plein += (int)$fields[6]  * (15 * 0.1) /2;
-					$reduit += (int)$fields[7] * (10 * 0.1) /2;
-					$sj += (int)$fields[9] * (10 * 0.9) /2;
-					$sa += (int)$fields[10] * (15 * 0.9) /2;
-					
-			
-			
-				}//end of foreach $city
-						$tab[$row]= (array("plein"=>$plein, "reduit"=>$reduit,"sj"=>$sj,"sa"=>$sa,"ville"=>$city));
-						$row++;
-						$firstRepresentation = false;
-
-			}//end of foreach $sousTableau
-		}else{
-			echo "le fchier n'a pas pu être ouvert par fopen";
-		}
-		fclose($handle);
-		print(json_encode($tab));
+	}else{
+		echo "le fchier n'a pas pu être ouvert par fopen";
+	}
+	
+	//fermeture du fichier en lecture
+	fclose($handle);
+	//affichage de "tab" encodé en JSON pour être passé à un script JS
+	print(json_encode($tab));
 ?>

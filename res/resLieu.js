@@ -11,7 +11,6 @@
 */
 const width_canevas = 1700;
 const height_canevas = 1200;
-const nb_barre = 2;
 const width_barre = 100;
 const espace_barres = 150;
 graph = document.getElementById("dessin");

@@ -24,6 +24,7 @@ function printCarreHaut(posX, posY, width, height, color){
 			console.log("erreur tarif printCarreHaut");
 		}
 	}
+	
 	var barre = {
 		X : posX,
 		Y : (height_canevas/2)-posY-height,
@@ -31,7 +32,7 @@ function printCarreHaut(posX, posY, width, height, color){
 		height : height, 
 		nbPlaces : nbPlaces,
 		tarif : tarif
-		};
+	};
 	
 	tabBlocs.push(barre); 
 	ctx.beginPath();
