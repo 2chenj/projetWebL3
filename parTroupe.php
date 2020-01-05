@@ -29,11 +29,6 @@
 		  $sousTableau[$fields[5]] [] = $fields;
 		  //array_push($sousTableau[$fields[3]],$fields);
 		  //former fields
-	  
-
-
-
-
 	}//end of while fgetcsv
 
 	ksort($sousTableau);
