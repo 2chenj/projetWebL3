@@ -66,8 +66,6 @@
 									print('<figure class = "lieu"><img  src="images/lieux/'.$imgLieu.'" width=100% height=100%></img></figure>'); 
 
 									print("<p>".$txtLieu."</p>"); 
-											//on ajoute une div avec "clear : both" pour que la taille du bloc .Lieu s'adapte à celle de l'image 
-									print("<div style=clear : both;></div>");
 
 									print("</div>");
 								}
