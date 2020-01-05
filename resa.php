@@ -29,7 +29,7 @@
 					$lieu      = $fields[3];
 					$village   = $fields[4];
 					$compagnie = $fields[5];
-			
+		
 					//On va chercher l'image du spcectacle
 					if ($handle = fopen('csv/affichesSpectacles.csv', 'r')){
 						while (($fields = fgetcsv($handle, 1000)) !== FALSE){
