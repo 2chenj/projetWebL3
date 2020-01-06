@@ -29,7 +29,7 @@
 					
 					//on offre la place
 					$panier[$id]['tarifReduit'] -= 1;
-					$panier[$id]['offert'] += 1;
+					$panier[$id]['sj'] += 1;
 					$n -=1 ;
 					
 				}	        
@@ -46,7 +46,7 @@
 					{
 						//on offre la place
 						$panier[$id]['tarifPlein'] -=1;
-						$panier[$id]['offert'] += 1;
+						$panier[$id]['sa'] += 1;
 						$n -= 1;
 
 					}
@@ -93,11 +93,13 @@
 					//pour chaque article du panier, si c'est celui qu'on est en train d'ajouter alors on a juste a ajouter le nombre de places,
 					//qu'on ajoute, à l'article déjà existant dans le panier
 					if($value['lineReservation'] == $article_added['lineReservation']){
-						$cart[$id]['tarifPlein'] += $article_added['tarifPlein'];
+						
+						$cart[$id]['tarifPlein']  += $article_added['tarifPlein'];
 						$cart[$id]['tarifReduit'] += $article_added['tarifReduit'];
 						$cart[$id]['tarifEnfant'] += $article_added['tarifEnfant'];
-						$cart[$id]['offert'] = 0;
-						$articleDejaExistant = 1;
+						$cart[$id]['sj'] 	 	   = 0;
+						$cart[$id]['sa']	 	   = 0;
+						$articleDejaExistant 	   = 1;
 					}
 				}
 			}
@@ -109,9 +111,10 @@
 					// j'ajoute dans le tableau cart l'article, avec les informations qui sont dans article_added
 					'lineReservation' 	=> $article_added['lineReservation'],
 					'tarifPlein'		=> $article_added['tarifPlein'],
-					'tarifReduit'           => $article_added['tarifReduit'],
+					'tarifReduit'       => $article_added['tarifReduit'],
 					'tarifEnfant'		=> $article_added['tarifEnfant'],
-					'offert'		=> 0
+					'sj'				=> 0,
+					'sa'				=> 0
 				);
 				
 			}
@@ -147,7 +150,8 @@
 									// on ajoute les places réservée dans le panier à nouvelle_ligne pour modifier le csv
 									$nouvelle_ligne[6] = ($ligne[6])+$article['tarifPlein'];
 									$nouvelle_ligne[7] = ($ligne[7])+$article['tarifReduit'];
-									$nouvelle_ligne[8] = ($ligne[8])+$article['offert'];
+									$nouvelle_ligne[9] = ($ligne[9])+$article['sj'];
+									$nouvelle_ligne[10] = ($ligne[10])+$article['sa'];
 									$nouvelle_ligne[11] = ($ligne[11])+$article['tarifEnfant'];
 									$total = $article['tarifPlein']*15+$article['tarifReduit']*10+$article['tarifEnfant'];
 									print("<p>Vous avez réservé ".$article['tarifPlein']." places tarif Plein, ".$article['tarifReduit']." places tarif réduit et ".$article['tarifEnfant']." places tarif enfant pour un total de ".$total." euros. </p>");							  		
@@ -209,7 +213,7 @@
 										$total += $price;
 						
 										// on affiche sur la page, pour chaque article, le nombre de places réservées dans chaque tarif et ke prix de l'article
-										print("<div class='Panier'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
+										print("<div class='Panier'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".($article['sj']+$article['sa'])." places offertes</p>");
 										print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe> pour ".$price." euros.</p></div>");
 														
 										break;
