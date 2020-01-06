@@ -1,5 +1,5 @@
 <?php
-	if(isset($_GET["ligne"])){}
+	if(isset($_GET["ligne"])){
 		
 		//on indique que le contenu est du JSON
 		header('Content-Type: application/json');

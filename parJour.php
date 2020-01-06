@@ -45,10 +45,10 @@
 							<horaire>'. $horaire .'</horaire>
 							<lieu> au '. $lieu .' à '. $village .'</lieu>,
 							<titrespectacle>'. $titre .'</titrespectacle>, par 
-							<troupe>' . $compagnie . ' </troupe> 
+							<troupe>' . $compagnie . '</troupe> 
 						
 							<form action ="resa.php" method="GET">
-								<input type="submit" style="" value="Réserver"/>
+								<input type="submit" value="Réserver"/>
 								<input type="hidden" name="line" value="'.$cptLine.'"/>
 							</form>
 						</table>

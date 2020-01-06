@@ -209,7 +209,7 @@
 										$total += $price;
 						
 										// on affiche sur la page, pour chaque article, le nombre de places réservées dans chaque tarif et ke prix de l'article
-										print("<div class='Spectacle'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
+										print("<div class='Panier'><p>".$article['tarifPlein']." places tarif plein, ".$article['tarifReduit']." places tarif réduit, ".$article['tarifEnfant']." places tarif enfant et ".$article['offert']." places offertes</p>");
 										print("<p><horaire>". $horaire . "</horaire> , <lieu> au " . $lieu . " à " . $village . "</lieu>, <titrespectacle>". $titre ."</titrespectacle>, par <troupe>" . $compagnie . "</troupe> pour ".$price." euros.</p></div>");
 														
 										break;
@@ -236,7 +236,7 @@
 
 					}else{
 						//si pas de panier
-						print("<h2> Votre panier est vide</h2>");
+						print("<h2 class=Panier> Votre panier est vide</h2>");
 					}
 				}
 			}
