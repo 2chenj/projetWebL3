@@ -1,4 +1,4 @@
-
+var nbRepresentations = 44;
 //donne un entier à partir d'une heure sous la forme xhy où x est le nb d'heures et y le nomre de minutes
 function timeToInt(time){
 	var tab = time.split("h");
@@ -37,7 +37,6 @@ for (var article in panier){
 	i++;
 }
 
-
 //pour chaque article
 for(var article in panier){
 		console.log(panier[article]);
@@ -58,7 +57,7 @@ for(var article in panier){
 				console.log("ville 1 = "+ville1);
 				console.log("heure1 = "+heure1);
 				
-				for(var i=1; i<44;i++)
+				for(var i=1; i<nbRepresentations;i++)
 				{
 					//pour chaque représentation
 					(function (i){
@@ -76,7 +75,7 @@ for(var article in panier){
 								if(jour1==jour2 && i!=ligne && !estDans(i,tabLignes)){
 									//si cette représentation à lieu le même jour que celle de l'article qu'on parcours et n'est pas dans le panier
 									//on utilise le script DEV.php pour calculer la distance et le temps entre les 2 représentations
-
+									
 									$.ajax({
 										type:"POST",
 										url:"DEV.php",

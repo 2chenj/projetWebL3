@@ -19,7 +19,7 @@
 					<form action ="resultats.php" method="POST">
 						<input type="submit" value="par représentaion" name="representaion"/>
 					</form>		
-						<form action ="resultats.php" method="POST">
+					<form action ="resultats.php" method="POST">
 						<input type="submit" value="par lieu" name="lieu"/>
 					</form>
 					<form action ="resultats.php" method="POST">
@@ -31,7 +31,7 @@
 		</br>
 
 	<!-- CANVAS -->  
-	<canvas id="dessin" width="1700" height="1200">
+	<canvas id="dessin" width="17000" height="1200">
 		<?php 
 			if(isset($_POST["lieu"])){
 				print('<script type="text/javascript" src = "res/resLieu.js"></script>');

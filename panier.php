@@ -83,7 +83,6 @@
 			$articleDejaExistant = 0;
 			$article_added = $_POST; // on enregistre les valeurs envoyées dans post 
 			
-			//verfier qu'il y a asser de places
 			if(isset($_COOKIE['panier']) && !empty($_COOKIE['panier']))
 			{   
 				// si le cookie existe
