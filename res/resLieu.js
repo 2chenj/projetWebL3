@@ -9,7 +9,7 @@
 	grossisement : zoom du graph (valeur par laquelle multiplier les valeurs d'affichage pour obtenir 
 					les vraies valeurs, sert aussi pour les valeurs sur les axes)
 */
-const width_canevas = 17000;
+const width_canevas = 1700;
 const height_canevas = 1200;
 const width_barre = 100;
 const espace_barres = 150;
