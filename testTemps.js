@@ -1,4 +1,4 @@
-var nbRepresentations = 44;
+
 //donne un entier à partir d'une heure sous la forme xhy où x est le nb d'heures et y le nomre de minutes
 function timeToInt(time){
 	var tab = time.split("h");
@@ -54,7 +54,7 @@ for(var article in panier){
 				var jour1 = data['jour'];
 				var heure1 = timeToInt(data['heure']);
 				var ville1 = data['ville'];
-				var length = data['length'];
+				var length = data['length']; //taille de ResultatsFestival.csv
 				console.log("ville 1 = "+ville1);
 				console.log("heure1 = "+heure1);
 				console.log("length = "+length);

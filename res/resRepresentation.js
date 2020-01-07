@@ -61,11 +61,11 @@ graph.addEventListener(
 				text = tabBlocs[i].nbPlaces*grossisement +" places tarif "+tabBlocs[i].tarif+" pour "+tabBlocs[i].height*grossisement +" euros";
 				
 				if(tabBlocs[i].tarif == "plein" || tabBlocs[i].tarif == "reduit"){
-					graph.title = text+" de bénéfice";
+					graph.title= text+" de bénéfice. [pièce "+((i)/4 +1)+"]";
 				}else{
-					graph.title = text+" de perte";
+					graph.title = text+" de perte. [pièce "+((i)/4 +1)+"]";
 				}
-				
+
 				break;
 			}else{
 				graph.title="";
