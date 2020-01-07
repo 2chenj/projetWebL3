@@ -18,11 +18,11 @@
 					$heure = $fields[1];
 					$ville = $fields[4];
 					$tab = array('jour' => $jour, 'heure' => $heure, 'ville' => $ville);
-					print(json_encode($tab));
-					break;
 				}
 				$row++;
 			}
+			$tab['length']=$row;
+			print(json_encode($tab));
 		}
 	}		
 	

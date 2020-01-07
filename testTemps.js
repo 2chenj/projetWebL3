@@ -54,10 +54,12 @@ for(var article in panier){
 				var jour1 = data['jour'];
 				var heure1 = timeToInt(data['heure']);
 				var ville1 = data['ville'];
+				var length = data['length'];
 				console.log("ville 1 = "+ville1);
 				console.log("heure1 = "+heure1);
+				console.log("length = "+length);
 				
-				for(var i=1; i<nbRepresentations;i++)
+				for(var i=1; i<length;i++)
 				{
 					//pour chaque représentation
 					(function (i){
